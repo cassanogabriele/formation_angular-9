@@ -305,6 +305,20 @@ fonctionnalité ou partie de l'application
 
 Il ne faut jamais mélanger les deux manières de faire dans le même projet, il faut choisir dès le départ la manière qui nous convient le mieux.
 
+## Module 
+
+## Ajouter un nouveau module 
+Les application Angular sont modulaires et elles possèdent leur propre système de module. Chaque application possède au moins un module : le module racine, "app.module", il peut suffir pour de petites applications mais la plupart des projets ont besoin de plusieurs modules, des modules de fonctionnalité (pour chaque fonctionnalité, on a va ajouter un nouveau module), qui sont donc qu'un ensemble de classes et d'éléments spécifiques de l'application. Quel que soit la nature du module, un modul est toujours une classe avec le décorateur "@NgModule" qui prend en paramètre un objet qui décrivent le module. "déclarations" sont les classes de vues, Angular à 3 types de classes de vues : Composant, Directives et Pipes, il faut renseigner toutes les classes de vues dans le tableau de déclarations. Il y a aussi une option "Exports" qui est un sous-ensemble de classes de vues à exporter. "Imports" concerne les classes nécessaires au fonctionnement du module dont on a besoin dans le module. "Providers" est une propriété qui concerne les services et l'injection de dépendandces et permet de fournir un service au module. "Boostrap" est une propriété qui ne concerne que le module racine, il faut y renseigner le composant racine, qui sera affiché au lancement de l'application. JavaScript à son propre système de modules qui est complètement différent et sans rapport avec le système de module d'Angular. En JavaScript, chaque fichier est un module et tous les objets définis dans ce fichier appartiennent au module. Le module JavaScript déclarer certains objets comme "public" en les déclarant avec le mot clé "export", d'autres modules javascript utilisent le mot clé "import" pour accéder à ces objets, c'est ce mécanisme utilisé dans Angular pour les imports et exports. Les systèmes de modules de JavaScript et de Angular sont différents mais complémentaires et on utilise bien les deux pour écrire une application.
+
+## BrowserModule
+Il inclut le CommonModule, ce qui fournit un certain nombre d'éléments dans les templates des composants comme les directives "ng-if" et "ng-for". La spécificité du BrowserModule qu'on utilise dans le module racine est qu'il permet de démarrer l'application dans le navigateur, on a pas besoin de faire cela dans tous les modules, le CommonModul est suffisant, c'est le module par défaut qu'il faut importer pour tous les sous-modules, qui ne sont pas le module racine de l'application.
+
+## Le tableau Declarations 
+On déclare les composants, les directives et les pipes propres au module.
+
+## Le tableau providers 
+C'est dans ce tableau qu'on peut déclarer des services propres au module.
+
 
 
 
