@@ -1,5 +1,3 @@
-## Apprentissage 
-
 ## Fichier app.component.ts
 // Composant parent du point d'entre de l'application 
 
@@ -319,7 +317,19 @@ On déclare les composants, les directives et les pipes propres au module.
 ## Le tableau providers 
 C'est dans ce tableau qu'on peut déclarer des services propres au module.
 
+## Dossier app/pokemons
+C'est dans ce dossier qu'on va placer tous les éléments relatifs au module "pokemon module" : les tempaltes, les composants, les routes, les directives, les pipes, etc.  
 
+## Les modules 
+Ils sont destinés à regrouper des fonctionnalités indépendantes les unes des autres, le plus possible et donc chaque module doit posséder les routes qui lui sont propres en interne.
 
+## Les routes 
+Il ne faut surtout pas utiliser la méthode "forRoute" dans des fichiers de définition des routes des sous modules, sous peine de lever une erreur. Elle est réservée pour la déclaration des routes au niveau du module racine de l'application et ensuite dans tous les sous-modules de déclaration de routes, il faut utiliser la méthode "forChild". Le routeur se chargera ensuite de combiner et assembler toutes les routes de l'application. Cela permet de définir les routes de l'application. Cela permet de définir les routes des sous modules sans avoir à modifier les routes principales de la configuration.
+
+## Structure de l'application 
+L'architecture de l'appication est déjà en place, elle comprend 2 modules nécessaires pour développer l'application finale : le module racine "app.module" et un sous-module pour gérer les pokémons "pokemon.module.ts". L'application finale va simplement pemetttre de gérer des pokémons, l'utilisateur pourra donc se connecter à son espace privé et pourra ensuite modifier des pokémons à sa disposition. Cet espace privé de l'utilisateur, on le gère dans le module "pokemon.module" dans lequel on pourra ajouter les éléments nécessaires au développement au fur et à mesure. On ajoutera un module "login.component" à la racine pour permettre à l'utilisateur de se connecter, cette fonctionnalité n'est pas relative directement à la gestion de pokémons, c'est pour cela qu'on la met au niveau de la racine. L'architecture de l'application est déjà en place.
+
+## Organisation 
+Il faut regrouper les fonctionnalités en modules, cela permet de créer des applications plus importantes sans s'emmêler les pinceaux au niveau du code. On va ensuite refactoriser le code présent dans plusieurs composants différents.
 
 
