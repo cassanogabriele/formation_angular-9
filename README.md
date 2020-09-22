@@ -333,10 +333,6 @@ L'architecture de l'appication est déjà en place, elle comprend 2 modules néc
 ## Organisation 
 Il faut regrouper les fonctionnalités en modules, cela permet de créer des applications plus importantes sans s'emmêler les pinceaux au niveau du code. On va ensuite refactoriser le code présent dans plusieurs composants différents.
 
-# Apprendre Angular: Développez facilement votre première application avec TypeScript !
-*Ce dépôt Github contient le code de la correction de la formation "Apprendre Angular".*
-<img width="400" height="640" src="./learn-angular-cover.jpg"/>
-
 ## Récupérer une instance de service dans le composant 
 
 ## A NE PAS FAIRE 
