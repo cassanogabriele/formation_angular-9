@@ -1,3 +1,4 @@
+
 ## Fichier app.component.ts
 // Composant parent du point d'entre de l'application 
 
@@ -332,4 +333,30 @@ L'architecture de l'appication est déjà en place, elle comprend 2 modules néc
 ## Organisation 
 Il faut regrouper les fonctionnalités en modules, cela permet de créer des applications plus importantes sans s'emmêler les pinceaux au niveau du code. On va ensuite refactoriser le code présent dans plusieurs composants différents.
 
+# Apprendre Angular: Développez facilement votre première application avec TypeScript !
+*Ce dépôt Github contient le code de la correction de la formation "Apprendre Angular".*
+<img width="400" height="640" src="./learn-angular-cover.jpg"/>
 
+## Récupérer une instance de service dans le composant 
+
+## A NE PAS FAIRE 
+constructor(
+  ## déclarer une variable et instancier une nouvelle instance de PokemonService
+  let pokemonsService = new PokemonService; 
+}
+
+Il y a 3 problèmes : 
+
+- le composant devra savoir comment créer le "PokemonService", si on modifie le constructeur du service par la suite, on devra retrouver chaque composant ou on a utilisé ce service et c'est pas une bonne solution
+- on crée une nouvelle instance du service à chaque fois qu'on va utiliser le mot clé "new". Si le service doit mettre en cache des pokemons et les partager avec tous les composants, on ne pourra pas le faire avec ce système car on aura besoin d'une instance unique à travers toute l'application.
+- lorsqu'on développe un service, le consommateur du service ne doit pas se demander comment fonctionne le service de l'intérieur, il doit s'agir d'une boîte noire prête à l'emploi et dont le fonctionnement interne n'intéresse pas les composants consommateurs
+
+## Comment créer un service dans un composant ? 
+Angular propose d'injecter les services dans les composants plutôt que de les instancier nous même. L'injection d'un service dans un composant est très simple, on peut le faire en deux lignes : 
+
+- ajouter un constructeur qui définit une propriété privée 
+- ajouter un fournisseur (provider) pour le service grâce aux annotations
+
+Comme on utilise l'injection de dépendance, Angular garantit que l'instance du service est unique à travers toutes l'application. Si on injecte le même service dans un autre composant, ce sera la même instance du service. Comme l'instance est unique, cela permet d'utiliser les services comme stockage provisoire des données.
+
+Souvent, on aura besoin d'injecter un service dans un service, le fonctionnement est le même que pour les composants : il faut utiliser également le constructeur pour injecter le service, on parle du "constructor injection pattern". 
