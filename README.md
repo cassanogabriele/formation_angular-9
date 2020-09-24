@@ -356,3 +356,16 @@ Angular propose d'injecter les services dans les composants plutôt que de les i
 Comme on utilise l'injection de dépendance, Angular garantit que l'instance du service est unique à travers toutes l'application. Si on injecte le même service dans un autre composant, ce sera la même instance du service. Comme l'instance est unique, cela permet d'utiliser les services comme stockage provisoire des données.
 
 Souvent, on aura besoin d'injecter un service dans un service, le fonctionnement est le même que pour les composants : il faut utiliser également le constructeur pour injecter le service, on parle du "constructor injection pattern". 
+
+## Fournir un service 
+Angular sait fournir l'instance de "pokemonService" lorsqu'on crée un nouveau "list.pokemon.component", on aura une erreur si on lance l'application car il faut également fournir un provider. Lorsqu'on fournit un service dans un composant, ses composants fils y ont également accès.
+
+## Injection des dépendances 
+Angular dispose de son propre framework d'injection et on ne peut pas vraiment développer une application sans cet outil. Il est nécessaire d'utiliser son injection de dépendances plutôt que des constructeur pour gérer les dépendances. L'injection de dépendance est un modèle de développement (design pattern) dans lequel chaque classe reçoit ses dépendances d'une source externe plutôt qu'en les créant elle même. Le système d'injection de dépendances d'Angular possède un "injecteur", on l'utilise pour gérer les dépendances au lieu de les gérer nous même. Par contre, on doit enregistrer des fournisseurs pour rendre disponible le service là ou on en a besoin : au niveau d'un module, d'un composant ou de toute l'application.
+
+## Fournir un service à toute l'application 
+Ca arrive parfois qu'on ait besoin de le faire, pour cela, on doit placer le fichier du service au niveau du dossier "app" et ensuite on doit fournir le service au niveau du module racine de l'application. Il faut l'importer au début du fichier et ensuite déclarer un fournisseur directement au niveau du module racine et puis renseigner le nom du service, il sera disponible dans toute l'application et on aura plus à l'ajouter manuellement pour l'utiliser dans les composants.
+
+
+
+
