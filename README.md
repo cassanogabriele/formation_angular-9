@@ -366,6 +366,13 @@ Angular dispose de son propre framework d'injection et on ne peut pas vraiment d
 ## Fournir un service à toute l'application 
 Ca arrive parfois qu'on ait besoin de le faire, pour cela, on doit placer le fichier du service au niveau du dossier "app" et ensuite on doit fournir le service au niveau du module racine de l'application. Il faut l'importer au début du fichier et ensuite déclarer un fournisseur directement au niveau du module racine et puis renseigner le nom du service, il sera disponible dans toute l'application et on aura plus à l'ajouter manuellement pour l'utiliser dans les composants.
 
+## Fournir un service à un module
+Dans le cas ou le service ne doit être disponible que dans un module, il est inutile de leur fournir au niveau de toute l'application. On supprime l'annotation "providers" dans "list.pokemon" et "details.pokemon". Il faut ensuite se rendre dans le module pokémon : "pokemon.module.ts" et déclarer le pokémon service dans le tableau "providers". On ne sera plus obligé de fournir le service pour chaque composant du module qui en aurait besoin, il sera disponible directement. Il ne reste plus qu'à l'injecter via le constructeur du composant. Il est recommandé d'être toujours le plus précis possible dans la stratégie de "providers", ne jamais fournir tous les services à travers l'application si cela n'est pas nécessaire et les injecter seulement quand on en a besoin.
+
+## Fournir un service à un seul composant
+Si on doit fournir un service à un seul endroit dans un composant, on peut utiliser l'anotation "@component" avec la propriété "providers".
+
+
 
 
 
