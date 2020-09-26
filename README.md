@@ -372,6 +372,12 @@ Dans le cas ou le service ne doit être disponible que dans un module, il est in
 ## Fournir un service à un seul composant
 Si on doit fournir un service à un seul endroit dans un composant, on peut utiliser l'anotation "@component" avec la propriété "providers".
 
+## Les formulaires 
+Ils sont omniprésent dans l'application, la gestion des formulaires est complexe entre le traitement des données utilisateurs, la validation, l'affichage de message d'erreur ou de succès qui demande beaucoup de travail pour offrir une expérience complète et agréable pour l'utilisateur. Angular peut aider à créer des formulaires.
+
+## Formulaire d'édition 
+Lorsque l'utilisateur cliquera sur un pokémon, il pourra l'éditer et lorsqu'il cliquera dessus, il y a un formulaire permettant de modifier toutes les informations d'un pokémon.
+
 
 
 
