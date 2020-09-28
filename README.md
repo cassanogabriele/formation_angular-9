@@ -378,6 +378,33 @@ Ils sont omniprésents dans l'application, la gestion des formulaires est comple
 ## Formulaire d'édition 
 Lorsque l'utilisateur cliquera sur un pokémon, il pourra l'éditer et lorsqu'il cliquera dessus, il y a un formulaire permettant de modifier toutes les informations d'un pokémon.
 
+## Formulaire pour l'édition d'un pokemon 
+On ne modifie pas l'identifiant, ni la date de création d'un pokémon car ces données ne sont pas appelées à être modifiée, il reste le point de vie, les dégâts, le nom et ses différents types, formulaire à 4 champs. Le formulaire sera un composant à part entière chargé de gérer les données saisies par l'utilisateur et qui permettra d'éditer un pokémon. On va découper le template et le composant dans deux fichiers séparés, la classe du composant dans le fichier "pokémon-form.compoennt.ts" et le template du composant qui aura le même nom et qui sera un fichier HTML.
+
+## Les composants avec une propriété d'entrée
+Ils sont souvent les fils d'autres composants parce qu'ils dépendent d'eux pour récupérer la valeur d'entrée. Le composant de formulaire sera le fils d'un autre composant "edit-pokemon.component" qui sera chargé de lui transmettre le pokémon à modifier.
+
+## Les champs du formulaire
+(ngSubmit) : permet de lier l'événement de validation du formulaire à la méthode "onSubmit()" du composant chargé de gérer la soumission du formulaire.
+
+On utilise la directive ngForm pour déclarer une variable de template "pokemonForm" qui permettra d'avoir accès à l'état de validité du formulaire ailleurs dans le template.
+
+La directive ng-if assure qu'un pokémon a bien été transmis au composant du formulaire, dans le cas contraire on affiche un message d'erreur à la place du formulaire.
+
+Chaque champ du formulaire est réprésenté par un bloc de code. L'utilisation de la directive ngModel permet la liaison bi-directionnelle entre le composant et le template : [()] est la combinaison de la liaison des propriétés (property binding) pour pousser une valeur du composant vers le template et de la liaison d'événement du template vers le composant (event binding).
+
+La variable de déclaration du template "name", en lui associant la directive "ngModel", permet de déclarer le champ sur lequel elle est rattachée comme étant un objet de type "form-control". Le champ est ainsi rattaché au formulaire global et on peut obtenir des informations dessus : est-il valide ? a-t-il déjà été modifié par l'utilisateur ou non ?
+
+Le champ qui gère les types de pokémon est plus complexe : 
+
+- On utilise la directive "ng-for" pour créer une liste de cases à cocher avec un type de pokémon associé à chaque checkbox.
+- On utilise le nom du type du pokémon pour lier la balise input et label grâce à l'interpolation et à la liaison l'attribut "for". 
+- On définit le nom du type comme valeur du champ 
+- On coche automatiquement la case si le pokémon possède déjà le type associé à cette case
+- A chaque fois que l'utilisateur coche ou décoche une case, on déclenche un appel à la méthode "selectType" avec le type qui a été ajouté ou retiré pour réajuster le modèle côté composant 
+- On applique le pipe "pokemonTypeColor" pour afficher un petit label de couleur pour afficher le nom du type à côté de chaque case à cocher.
+
+
 
 
 
