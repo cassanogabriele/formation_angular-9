@@ -404,6 +404,21 @@ Le champ qui gère les types de pokémon est plus complexe :
 - A chaque fois que l'utilisateur coche ou décoche une case, on déclenche un appel à la méthode "selectType" avec le type qui a été ajouté ou retiré pour réajuster le modèle côté composant 
 - On applique le pipe "pokemonTypeColor" pour afficher un petit label de couleur pour afficher le nom du type à côté de chaque case à cocher.
 
+## Ajouter le bouton de validation du formulaire
+On utilise la liaison de propriété "disabled" pour désactiver le bouton de validation si le formulaire est invalide, cela oblige l'utilisateur à avoir correctement remplit tous les champs auparavant.
+
+## Ajouter des règles de validation 
+Le champ nom sera obligatoire et devra contenir une chaîne de caractères de 1 à 25 lettres uniquement. La quantité de point de vie d'un pokémon sera forcément un nombre compris entre 0 et 999, la quantité de dégats sera un nombre compris entre 0 99 seulement. Pour les types du pokémon, l'utilisateur devra sélectionner obligatoirement entre 1 à 3 types pour chaque pokémon. Les 4 champs du formulaire seront obligatoires. Les 4 premières règles peuvent être implémenter grâce aux nouvelles règles de l'HTML5, required, pour rendre un champ obligatoire et pattern qui permet de définir une expression régulière pour valider un champ (https://www.w3schools.com/tags/att_input_pattern.asp). 
+
+## Prévenir l'utilisateur en cas d'erreur
+On doit prévenir l'utilisateur sur ce qui ne fonctionne pas, on va utiliser les classes ajoutées automatiquement par la directive "ng-model" pour utiliser ces classes avec le css en ajoutant une bordure verte ou rouge en fonction de la validité des champs du formulaire, cela permet à l'utilisateur d'avoir un retour visuel sur l'état de validité d'un champ. Ensuite, on peut utilser ces classes avec les variables de template et la directive "ng-if" pour afficher un message en cas d'erreur sur un champ. On doit ajouter une feuille de style qui s'appliquera uniquement sur le composant du formulaire, qui est le comportement par défaut d'un composant Angular. 
+
+Pour respecter le principe d'une tâche-1 fichier, on crée une feuille de style a part ("pokemon-form.component.css) : on affiche une bordure verte à gauche si un champ requis est valide, sinon on affiche un bordure rouge pour les éléments invalides qui ne sont pas des éléments de type "form" : input, select, etc. Les classes du fichier css ont été autoamatiquement ajoutés par la directive "ng-model". On doit lier le composant de formulaire à la nouvelle feuille de style, on peut passer plusieurs feuilles de styles à un composant mais pour un seul template. On peut également utiliser l'attribut "styles" et au lieu de passer un chemin relatif, on peut passer directement des propriétés css mais si le code est trop long et qu'on veut une application bien organisée, ce n'est pas conseillé et les feuilles de styles sont souvent communes à plusieurs composants, c'est préférable de les centraliser dans des feuilles de style à part. 
+
+
+
+
+
 
 
 
