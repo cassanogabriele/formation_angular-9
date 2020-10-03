@@ -415,6 +415,26 @@ On doit prévenir l'utilisateur sur ce qui ne fonctionne pas, on va utiliser les
 
 Pour respecter le principe d'une tâche-1 fichier, on crée une feuille de style a part ("pokemon-form.component.css) : on affiche une bordure verte à gauche si un champ requis est valide, sinon on affiche un bordure rouge pour les éléments invalides qui ne sont pas des éléments de type "form" : input, select, etc. Les classes du fichier css ont été autoamatiquement ajoutés par la directive "ng-model". On doit lier le composant de formulaire à la nouvelle feuille de style, on peut passer plusieurs feuilles de styles à un composant mais pour un seul template. On peut également utiliser l'attribut "styles" et au lieu de passer un chemin relatif, on peut passer directement des propriétés css mais si le code est trop long et qu'on veut une application bien organisée, ce n'est pas conseillé et les feuilles de styles sont souvent communes à plusieurs composants, c'est préférable de les centraliser dans des feuilles de style à part. 
 
+## Intégration du formulaire
+Avant de pouvoir utiliser un formulaire, il faut l'intégrer dans l'application existante. 
+La syntaxe entre [] indique une liaison de propriétés sur la propriété d'entrée du composant.
+
+## Développer le composant du formulaire directement dans EditPokemonComponent 
+Il est possible de le faire mais si on veut réutiliser ce formulaire pour ajouter un pokémon, dans ce cas le formulaire serait à part et pourrait être intégré à deux composants différents dans l'application. Il faut toujours respecter le principe d'une tâche = 1 fichier, cela s'applique aussi pour les formulaires. Le composant "edit-pokemon" est complet et utilisable partout pour permettre à l'utilisateur d'éditer ses pokémons.  
+
+## Conclusion sur les formulaires 
+Même si Angular simplifie la tâche, il faut quand même un peu  de travail. A chaque fois qu'on recharge les données dans le navigateur, les données concernant les pokémons sont réinitialisés et les changements ne sont pas pris en compte. Il faut les persister sur un serveur distant afin de donner une mémoire à l'application.
+
+## Comment communiquer avec un serveur distant ?
+Il y a plusieurs manières de faire : on peut faire des appels sur le réseaux avec des promesses ou avec les "observable" et la programmation reactive. 
+
+## Les promesses 
+Elles sont natives en JavaScript depuis ES6, ce n'est plus un objet interne à Angular, on peut les utiliser sans avoir besoin de nouvelles importations. Elles sont là pour essayer de simplifier la programmation asynchrone qui désigne un mode de fonctionnement dans lequel les opérations sont non bloquantes : l'utilisateur peut continuer à utiliser l'application web en naviguant et en remplissant des formulaires sans que le site soit bloqué dès qu'on fait un appel au serveur. On peut aussi utiliser des fonctions de callback pour gérer les appels asynchrones mais les promesses sont plus pratiques : lorsqu'on crée une promesse avec la classe "promise", on lui associe implicitement une méthode "then" qui prend 2 arguments : une callback de succès et ensuite une callback d'erreur. Lorsque la promesse à réussit, c'est la callback de succès qui est appelée et si elle échoue, c'est la callback d'erreur qui est invoquée. ES6 permet d'améliorer la lisibilité avec les "arrow" fonction, elle sont très utilisée avec la programmation asynchrone car elles permettent de remplacer des fonctions anonymes omniprésentes dans les appels asynchrones en JavaScript avec une syntaxe plus élégante. Les promesses peuvent couvrir beaucoup de cas d'appels asynchrones, la gestion des événements mais elles ont leur limite surtout quand il faut gérer un grand nombre de requêtes dans un délai très court. Pour gérer proprement plusieurs événements qui peuvent arriver en parallèle sans saturer le code de promesse, il faut utiliser la programmation reactive.
+
+
+
+
+
 
 
 
