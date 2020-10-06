@@ -445,6 +445,17 @@ On peut faire plus que s'abonner à un flux, les flux peuvent émettre 3 types d
 ## Les observables
 Dans RxJS, un flux d'événement est représenté par un objet "Observable" qui sont très similaires à des tableaux, comme eux, ils contiennent une collection de valeurs, il ajoute juste la notion de valeur reportée dans le temps. Dans un tableau, toutes les valeurs sont disponibles immédiatemment, dans un Observable, les valeurs viendront au fur et à mesure, plus tard dans le temps. On peut traiter un Observable avec des opérateurs similaires à ceux des tableaux. La fonction "take" va récupérer les "n" premiers éléments d'un flux et se débarasser des autres : take(2) -> garder les deux premiers éléments du flux, les autres n'apparaissent plus dans le flux transformé. La fonction "map" applique la fonction passé en paramètre sur chaque événement et retourne le résultat. La fonction "filter" pêrmet de filtrer uniquement les événements qui répondent positivement au prédicat passé en paramètre. La fonction "merge" permet de fusionner deux flux : flux de sortie et aggrégation de deux flux passé en entrée. La fonction "subscribe" applique une fonction passée en paramètre à chaque événement reçu dans le flux, c'est cette fonction qu'on utilisera le plus souvent, elle accepte une deuxième fonction en paramètre consacrée à la gestion d'erreur et lorsque ce flux est terminé, il enverra un événement de terminaison qu'on peut détecter avec une troisème fontion. Un Observable est une simple collection asynchrone dont les événements arrivent au cours du temps. On peut construire des Observable depuis une requête Ajax, depuis un événement du navigateur, une réponse de websocket, une promesse, tout ce qui est asynchrone. La librairie qui forme le coeur d'Angular a un support basique pour les Observables, on est rapidement limité, il faut augmenter ce support avec des opérateurs et des extensions issus directement de librairie RxJS
 
+## Choisir entre Observables et Promesse 
+Les Observables sont différents des Promesse, même si il s'y ressemblent par certains aspects car ils gèrent tout deux des valeurs asynchrones, mais un Observable n'est pas quelque chose à usage unique, il continuera d'émettre des événements jusqu'à ce qu'il émette un événement de terminaison ou que l'on se désabonne de lui. Globalement, l'utilsation des Promesse et plus simple et dans de nombreux cas, c'est suffisant pour répondre aux besoins de l'application. Pour récupérer des données d'un serveur distant et les afficher à l'utilisateur, si on a besoin de faire qu'un seul appel, l'utilisation d'un Observable n'est pas forcément nécessaire. Il est possible de transformer un Observable en une promesse très simplement grâce à la méthode "toPromise" de RxJS. Plutôt que d'appliquer la méthode "subscribe" propre aux Observables, on pourra utiliser "then" propre au Promesses. Pour le moment, les Observables ne font pas partie de la spécification EcmaScript officielle mais cela pourrait être le cas dans le futur.
+
+## Conclusion 
+La programmation réactive permet d'élever le niveau d'abstraction du code et on doit moins se soucier de certains détails d'implémentation. Les applications web évoluent sans cesse et sont de plus en plus dynamique, l'édition d'un formulaire peut déclencher automatiquement une sauvegarde sur un serveur distant, un simple commentaire pour se répercuter directement sur l'écran de tous les utilisateurs connectés. En tant que développeur, il faut des outils pour gérer tout cela et le programmation réactive en fait partie.
+
+
+
+
+
+
 
 
 
