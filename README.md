@@ -451,6 +451,14 @@ Les Observables sont différents des Promesse, même si il s'y ressemblent par c
 ## Conclusion 
 La programmation réactive permet d'élever le niveau d'abstraction du code et on doit moins se soucier de certains détails d'implémentation. Les applications web évoluent sans cesse et sont de plus en plus dynamique, l'édition d'un formulaire peut déclencher automatiquement une sauvegarde sur un serveur distant, un simple commentaire pour se répercuter directement sur l'écran de tous les utilisateurs connectés. En tant que développeur, il faut des outils pour gérer tout cela et le programmation réactive en fait partie.
 
+## Les requêtes HTTP (amélioration de l'application "pokémon")
+Pour l'instant, l'application est assez simple et permet seulement d'éditer des pokémon, on va vouloir communiquer avec un serveur distant pour récupérer les pokémons, les éditer, les supprimer et sauvegarder les changements sur le serveur. On pourrait aussi ajouter un champ de recherche sur la page d'accueil pour permettre de retrouver un pokémon plus facilement. Une API est une interface de communication, c'est ce qui permet de communiquer avec un service distant depuis une application, par exemple pour stocker les données sur un serveur distant de manière durable.
+
+## HttpClientModule
+Ce module permet de faire communiquer l'application Angular avec un serveur distant via le protocole HTTP, ce n'est pas un module de base d'Angular, il faut l'importer depuis la librairie "@angular/common/http". Le fichier "systemjs.config.js" est déjà configuré pour charger cette librairie et on peut l'importer depuis n'importe quel module de l'application. On le déclare dans la liste "imports" du module racine de l'application, on doit commencer par importer le nouveau module et ensuite, il faut l'ajouter en dessous du "BrowserModule", le module sera disponible partout dans l'application.
+
+
+
 
 
 
