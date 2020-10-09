@@ -457,6 +457,30 @@ Pour l'instant, l'application est assez simple et permet seulement d'éditer des
 ## HttpClientModule
 Ce module permet de faire communiquer l'application Angular avec un serveur distant via le protocole HTTP, ce n'est pas un module de base d'Angular, il faut l'importer depuis la librairie "@angular/common/http". Le fichier "systemjs.config.js" est déjà configuré pour charger cette librairie et on peut l'importer depuis n'importe quel module de l'application. On le déclare dans la liste "imports" du module racine de l'application, on doit commencer par importer le nouveau module et ensuite, il faut l'ajouter en dessous du "BrowserModule", le module sera disponible partout dans l'application.
 
+## Simuler un API web
+Jusque maintenant, on récupérait les données depuis le service "pokemons.service" en utilisant le fait que l'instance de ce service soit unique à travers toute l'application mais ce système ne convient plus car on veut pouvoir communiquer avec un serveur distant. On ne dispose pas d'un serveur pour gérer les requêtes de l'application. On a un moyen de s'en sortir : Angular permet de simuler une API qui fonctionnera exactement comme si on utilisait un seveur distant, cette simulation est possible grace au module "HttpClientInMemoryWebApiModule" de la librairie "InMemoryWebAPI". Il faut déclarer l'API simulée auprès du reste de l'application, il est recommandé d'enregistrer les services globaux a toute l'application dans la liste import du module racine ("app.module.ts").
+
+## L'option dataEncapsulation 
+Elle permet de préciser le format des données renvoyées par l'API. On aurait pu encapsuler les données de réponse dans un objet avec une clé data.
+
+## Méthode log appelée avec l'opérateur "tap" (pokemons.service.ts)
+private log(log: string){
+	console.info(log);
+}
+
+Méthode qui permet de centraliser la gestion des logs d'un service, si on souhaite, plus tard, archiver les logs plutôt que de les affichers dans la console, il suffira de modifier cette méthode.
+
+## Gérer les erreurs
+Il faut gérer les erreurs dans le cas ou la requête n'aboutirait pas. C'est une étape importante, il faut anticiper les erreurs HTTP, qui pourraient se produire pour des raisons indépendantes de notre volonté, c'est pour ça qu'il faut implémenter la méthode "handleError" qu'on va ajouter et qui est dédiée à la gestion des erreurs dans le service. La syntaxe "T" en TypeScript désigne le fait qu'on va typer un type en lui-même (number ou string). On utilise un nouvel opérateur of qui permet de transformer les données passées en paramètres en un Observable et ne pas interrompre le déroulement de tous les processus dans l'application, en cas d'erreur, on ne bloque pas le déroulement de l'application. Comme l'application est une démonstration, on se contente d'afficher une erreur dans la console. Dans le cas d'une application de production, on pourra mettre en place un système plus élaboré. Chaque méthode du service renvoie un Observable dont le résultat à un type différent. 
+
+
+
+
+
+
+
+
+
 
 
 
