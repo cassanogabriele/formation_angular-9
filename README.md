@@ -473,8 +473,16 @@ Méthode qui permet de centraliser la gestion des logs d'un service, si on souha
 ## Gérer les erreurs
 Il faut gérer les erreurs dans le cas ou la requête n'aboutirait pas. C'est une étape importante, il faut anticiper les erreurs HTTP, qui pourraient se produire pour des raisons indépendantes de notre volonté, c'est pour ça qu'il faut implémenter la méthode "handleError" qu'on va ajouter et qui est dédiée à la gestion des erreurs dans le service. La syntaxe "T" en TypeScript désigne le fait qu'on va typer un type en lui-même (number ou string). On utilise un nouvel opérateur of qui permet de transformer les données passées en paramètres en un Observable et ne pas interrompre le déroulement de tous les processus dans l'application, en cas d'erreur, on ne bloque pas le déroulement de l'application. Comme l'application est une démonstration, on se contente d'afficher une erreur dans la console. Dans le cas d'une application de production, on pourra mettre en place un système plus élaboré. Chaque méthode du service renvoie un Observable dont le résultat à un type différent. 
 
-## Mtthode getPokemon(id:number)
+## Méthode getPokemon(id:number)
 Méthode très similaire à "getPokemons", la seule différence est l'url utilisée et le type de retour, cette url retourne un seul pokémon et non un tableau de plusieurs pokémons, ensuite la méthode va retourner un seul pokémon au lieu d'un tableau de pokémon. Le service pokemon service renvoit un Observable et on doit mettre à jour tous les composants qui consomment ce service.
+
+## Extraction de données
+Comme on extrait, maintenant, les données à partir d'une API, si on veut persister les changements, on aura besoin de les écrire sur le serveur : faire une requête HTTP pour enregistrer les modifications. 
+
+## Ajouter une méthode de modification dans pokemons.service
+On a besoin d'une nouvelle méthode pour persister les modifications faites depuis le formulaire d'édition. La structure de la requête pour modifier un pokémon est similaire à une requête déjà vue, bien qu'on va utiliser une requête de type "put", c'est le type de requête qui est utilisé pour modifier une ressource afin de persister les changements côté serveur. Chaque requête HTTP contient un en-tête et un corps, il possible d'ajuster les deux en fonction des besoins de l'application.
+
+
 
 
 
