@@ -482,6 +482,13 @@ Comme on extrait, maintenant, les données à partir d'une API, si on veut persi
 ## Ajouter une méthode de modification dans pokemons.service
 On a besoin d'une nouvelle méthode pour persister les modifications faites depuis le formulaire d'édition. La structure de la requête pour modifier un pokémon est similaire à une requête déjà vue, bien qu'on va utiliser une requête de type "put", c'est le type de requête qui est utilisé pour modifier une ressource afin de persister les changements côté serveur. Chaque requête HTTP contient un en-tête et un corps, il possible d'ajuster les deux en fonction des besoins de l'application.
 
+## Sauvegarder les données 
+On a ajouté une méthode permettant de persister les modifications faites sur un pokémon, il faut s'en servir. On modifie la méthode qui gère la soumission du formulaire d'édition du pokémon (pokemonform.component.ts). Pour persister les données entre deux sessions, il aurait fallu être en posséssion d'un serveur distant dédié à la sauvegarde.
+
+## Supprimer un pokémon 
+On ajoute une nouvelle fonctionnalité permettant de supprimer un pokémon dans le composant "detailPokemon.component.ts". Il faut avant ajouter une méthode qui va supprimer un pokémon dans le service de gestion des pokémons : "pokemon.service".
+
+
 
 
 
