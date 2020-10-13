@@ -488,6 +488,12 @@ On a ajouté une méthode permettant de persister les modifications faites sur u
 ## Supprimer un pokémon 
 On ajoute une nouvelle fonctionnalité permettant de supprimer un pokémon dans le composant "detailPokemon.component.ts". Il faut avant ajouter une méthode qui va supprimer un pokémon dans le service de gestion des pokémons : "pokemon.service".
 
+## Champ de recherche 
+On va ajouter une nouvelle fonctionnalité pour pouvoir rechercher des pokémons par leur nom sous la forme d'un champ de recherche qui devra implémenter l'auto-complétion. Au fur et à mesure que l'utilisateur tapera un terme de recherche, on affichera immédiatement une liste de pokémon correspondant à ce critère de recherche. Pour le moment, on a effectué des requêtes HTTP relativement simples, des requêtes "one shot" : on effectue une requête et on récupère le résultat mais les requêtes ne sont pas toujours "one shot", dans certains cas on peut lancer une requête puis l'annuler, puis faire une requête différente avant que le serveur ait répondu à la première. Cette séquence requête-annulation-requête est plus difficile à implémenter.
+
+
+
+
 
 
 
