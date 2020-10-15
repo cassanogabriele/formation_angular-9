@@ -491,6 +491,23 @@ On ajoute une nouvelle fonctionnalité permettant de supprimer un pokémon dans 
 ## Champ de recherche 
 On va ajouter une nouvelle fonctionnalité pour pouvoir rechercher des pokémons par leur nom sous la forme d'un champ de recherche qui devra implémenter l'auto-complétion. Au fur et à mesure que l'utilisateur tapera un terme de recherche, on affichera immédiatement une liste de pokémon correspondant à ce critère de recherche. Pour le moment, on a effectué des requêtes HTTP relativement simples, des requêtes "one shot" : on effectue une requête et on récupère le résultat mais les requêtes ne sont pas toujours "one shot", dans certains cas on peut lancer une requête puis l'annuler, puis faire une requête différente avant que le serveur ait répondu à la première. Cette séquence requête-annulation-requête est plus difficile à implémenter.
 
+## Consommer un Observable : comment utiliser l'Observable renovyer par la méthode "searchPokemons" depuis un composant
+On va créer un nouveau composant "pokemonSearchComponent" qui aura pour rôle d'afficher et gerer le champ de recherche des pokémon et l'autocomplétion. Le template du composant sera simple : un champ de recherche et une liste de résultats correspondant au terme de la recherche. On crée un nouveau fichier dans le dossier "pokemon", "search-pokemon.component.html".Le $ à la fin de la propriété "pokemons" est une convention pour indiquer que la propriété "pokemons$" n'est pas une méthode statique simple, un flux. 
+
+## Classe du composant 
+On crée un fichier "search-pokemon.component.ts" dans le dossier "pokemon". Le code est un peu compliqué, la problématique est que si on passe chaque saisie de l'utilisateur au "pokemon-search-service", on va déclencher une tempête de requêtes HTTP, qui n'est pas une bonne idée, cela surchargerais l'API inutilement. On peut réduire le flux de requête grâce à un certain nombre d'opérateurs, on fait moins d'appels au "pokemons.service", tout en obtenant toujours des résultats aussi rapides. 
+
+## Afficher le champ de recheche
+On aimerais l'afficher au-dessus de la liste de tous les pokémons, il faut ajouter la balise du composant "pokemonSearch", il faut modifier le template du composant "list-pokemon.component.ts" en ajoutant cette balise, dans le dossier "pokemon".
+
+## Ajouter un icône de chargement 
+Il y a un petit délai de chargement entre les pages depuis que l'application utilise une API plutôt que les données issues d'un fichier statique, c'est comportement tout à fait normal. L'application est plus lente car on récupère les données depuis un service tiers, on doit attendre une réponse avant de pouvoir afficher le résultat. On peut rendre le temps d'attente un peu plus agréable pour l'utilisateur en ajoutant une icône de chargement. On remplace le message affiché à l'utilisateur par un icône avec l'aide de la librairie Materialize. On crée un nouveau fichier "loader.component.ts" dans le dossier "app" puisque l'icône de chargement n'est pas spécifique au chargement des pokémons. Si l'application venait à grandir, on pourrait utiliser cet icône de chargement ailleurs que dans l'application. 
+
+## Conclusion 
+L'utilisation des Observables est difficile à appréhender mais il faut s'habituer à la programmation réactive et au changement de paradigme que ça représente, le développement web va dans ce sens. 
+
+## L'authentification
+Pour l'instant, l'application n'est pas très fiable en termes de sécurité, n'importe quel utilisateur peut consulter ou modifier des pokémons dans l'application. Ce n'est pas ce que l'on veut, il serait plus sur de demander à l'utilisateur de s'authentifier avant de pouvoir interagir avec des pokémons. Si l'utilisateur s'authentifie correctement, alors il est redirigé vers la liste des pokémons, sinon il reste bloqué sur le formulaire de connexion. Pour mettre en place une authentification, on va avoir besoin des "guards", un guard est un mécanisme de protection utilisé par Angular pour mettre en place l'authentification mais pas seulement.
 
 
 
