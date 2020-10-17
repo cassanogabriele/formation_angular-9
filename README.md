@@ -518,21 +518,11 @@ Les applications ont souvent besoin de restreindre l'accès aux fonctionnalités
 ## Protéger des routes 
 Mettre en place des guard si on a un grand nombre de routes dans l'application, il ne faut pas déclarer un guard pour chaque route, on peut déclarer les routes différemment dans "pokemon-routing.module.ts", on va réorganiser la déclaration des routes pour pouvoir appliquer le guard à toutes les routes qui concernent les pokémons : l'affichage du formulaire d'édition et l'affichage de détails d'un pokémon. Pour l'instant, les pokémons sont protégé par le guard qu'on a mis en place mais en réalité, c'est une protection très symbolique, on va mettre en place un système d'authentification plus complexe.
 
+## Système d'authentification plus complet 
+Pour l'instant, toutes les routes du module "pokémon" sont accessibles à tout le monde mais on veut rendre le module accessible uniquement aux utilisateurs qui sont authentifié, avec un système fiable. On va donc améliorer le "guard" afin de rediriger les utilisateurs anonymes vers un formulaire de connexion lorsqu'ils essaieront d'accéder à l'application. Ce formulaire sera constitué d'un champ "name" et "password". Le "guard" va avoir besoin d'un nouveau service dédié a l'authentification, cela permettra de bien découper le "guard" et le service dédié aux éléments métiers de la connexion. Ce service sera chargé de connecter ou déconnecter l'utilisateurs courant et de retenir l'url à laquelle il voulait accéder avant d'être intercepté par le "guard" afin d'être redirigé au bon endroit après son authentification. On crée un nouveau fichier "auth.service.ts" dans le dossier "app". Désormais, on fait appel au nouveau service pour déterminer si un utilisateur est authentifié ou non. On injecte en plus le AuthService et le Routeur dans le constructeur, en paramètre à la méthode "CanActivate", l'objet Route de type "ActivatedRouteSnapshot", la future route qui sera appelée et l'objet "state RouterstateSnapshot" contient le futur état du routeur de l'application qui devra passer le "guard". On n'a pas encore définit de fournisseur dans le AuthService, on peut injecter des services dans les "guards". Le guard retourne un booléen de manière synchrone comme résultat : si l'utilisateur est connecté, le "guard" retourne "true" et la navigation continue, sinon on stocke l'url de la route à laquelle l'utilisateur à tenté d'accéder dans la propriété "redirectUrl", ensuite, on redirige l'utilisateur vers la page de connexion qui est une page qu'on va créer.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## La page de connexion 
+On a besoin d'un composant qui se charge d'afficher une page de connexion à l'utilisateur. On crée un nouveau fichier "login.component.ts". 
 
 
 
