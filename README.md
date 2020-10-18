@@ -524,6 +524,16 @@ Pour l'instant, toutes les routes du module "pokémon" sont accessibles à tout 
 ## La page de connexion 
 On a besoin d'un composant qui se charge d'afficher une page de connexion à l'utilisateur. On crée un nouveau fichier "login.component.ts". 
 
+## L'authentification 
+Il existe d'autres types de "guards", ils ont comme point commun de pouvoir modifier le comportement par défaut de la navigation. 
+
+## Comment déployer l'application en ligne ?
+Pour le moment, l'application est seulement sur notre machine et personne d'autre que nous ne peut la voir. On va déployer l'application en production qui est une environnement spécifique, quand l'application est prête pour être utilisée par l'utilisateur, c'est le seul environnement auquel les utilisateurs doivent avoir accès, il y a l'environnement de déploiement quand on code et l'environnement de test, quand on test. On mettre en production l'application sur Firebase qui appartient à Google et propose d'héberger gratuitement des sites statiques en-dessous d'un certain quotat. Firebase hosting est un des nombreux services proposé par le site Firebase mais c'est celui qu'on va utiliser. Le seul prérequis est de disposer un compte Google. Il existe des techniques de déploiement plus poussées pour les professionnels en entreprise, il faut regarder dans la documentation officielle.
+
+
+
+
+
 
 
 
