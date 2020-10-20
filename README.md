@@ -541,6 +541,16 @@ On peut déployer l'application en copiant tous les fichiers du projet vers le s
 ## Charger les dépendances depuis le web 
 On ne peut pas se contenter de déployer l'application en copiant tous les fichiers locaux vers le serveur distant. Il faut effectuer 2 opérations auparavant : supprimer le dossier "node module", qui contient plus de code nécessaire pour exécuter l'application et passer l'application en mode production, Angular pourra ainsi optimiser certains éléments en interne. Il faut du temps pour télécharger tous les fichiers du dossier "node module", d'autant qu'on ne les utilise pas tous, l'utilisateur devra attendre que ces fichiers se téléchargent peu à peu, hors l'application ne nécessite qu'une infine fraction de ces fichiers pour fonctionner. A la place, on va charger seulement les fichiers dont on a besoin depuis le web, grâce au site "unpkg.com", c'est un site qui met à disposition des librairies sur Internet, on peut l'utiliser pour charger les paquets dont on a besoin et qui sont décrit le fichier "system.config.js", la syntaxe pour chager les fichier est : "liensverslesite/versionqu'onveut/file" (unpkg.com/@agnular/core@5.0.0/bundles/core.umd.min.js). On va donc charger les modules dont on a besoin depuis le site, il faut donc modifier la configuration de "system.js" car on ne veut plus charger les modules depuis notre module mais depuis le site "unpackage.com". On va créer un nouveau fichier "systemjs.config.js" dans le même dossier (le dossier source) que le "systemjs" précédent (on récupère le contenu dans les fichiers de la formation). C'est un fichier de configuration standard pour "systemjs", on a changé le chemin de l'alias, on charge directement les paquets depuis le web, on respecte la convention de nommage de "unpackage.com".
 
+## Modifier le fichier "index.html"
+Toutes les requêtes HTTP effectuées vers l'application passent par le fichier "index.html", c'est le point d'entrée, on doit donc adapter ce fichier pour l'environnement de production. Il faut modifier certaines importations concernant les "polyfilles", "rxjs" et "systemjs".
+
+## Activer le mode production 
+Les applications Angular s'exécutent en mode développement par défaut, le passage en mode production permet de rendre l'application plus rapide en désactivant les vérifications spécifiques au développement. Pour activer le mode production lorsque l'application sera exécutée sur le mode distant, il faut ajouter un morceau de code dans le fichier "main.ts". 
+
+
+
+
+
 
 
 
