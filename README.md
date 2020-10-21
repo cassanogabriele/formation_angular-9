@@ -547,6 +547,15 @@ Toutes les requêtes HTTP effectuées vers l'application passent par le fichier 
 ## Activer le mode production 
 Les applications Angular s'exécutent en mode développement par défaut, le passage en mode production permet de rendre l'application plus rapide en désactivant les vérifications spécifiques au développement. Pour activer le mode production lorsque l'application sera exécutée sur le mode distant, il faut ajouter un morceau de code dans le fichier "main.ts". 
 
+## Une dernière vérification 
+Avant de passer au déploiement, il faut vérifier que tout fonctionne bien en local en lançant la commande "npm start", laisser tourner la commande et ne pas interrompre le script. Si l'application ne se lance pas correctement, il faut reprendre les étapes vues une à une et s'assurer de rien avoir manqué. L'application fonctionne correctement et on peut vérifier dans la console du navigateur, la provenance des paquets qui sont chargés, on peut voir que tous les packages sont chargés depuis "unpkg.com". Les paquets nécessaires à l'application sont donc bien chargés depuis le web, pour en être plus sur, on peut supprimer le dossier "node module" dans l'explorateur de fichier et si on retourne dans le navigateur et qu'on raffraîchit la page, l'application fonctionne toujours car on ne charge plus les dépendances depuis ce dossier. Si par la suite, on souhaite reprendre le développement de l'application, il faudra quand même qu'on réinstalle le dossier "node module" avec la commande "npm install", on ne charge pas "typescript" depuis le web avec "unpackage.com".
+
+## Créer un projet sur Firebase 
+Il faut d'abord créer un projet dans Firebase, cela donnera accès à une console d'administration pour le projet. Ensuite, on devra installer Firebase cli en local, c'est une boîte à outil mis à disposition par Firebase pour permettre de déployer l'application en une seule ligne de commande sur le serveur, on devra ensuite configurer le projet auprès de Firebase pour préparer les éléments spécifiques au déploiement et on déploiera l'application de Pokémon et on pourra y accéder sur Internet.  
+On va se connecter à l'interface d'administration de Firebase, il faut entrer nos identifiants "google" si on est pas déjà connecté : https://firebase.google.com/ et se connecter avec un compte google. Aller à "Accéder à la console" : https://console.firebase.google.com/?pli=1, il y a un bouton qui permet d'ajouter un projet, on clique et on doit choisir un nom pour l'application, crée un compte et chosir le pays, ensuite on arrive dans un espace dédié à l'administration de l'application. Dans le menu à gauche de l'interface, il y a un onglet "Hosting", qui est un service qu'on va utiliser et c'est à cet endroit qu'on pourra consulter l'historique des déploiements sur Firebase, on a maintenant un projet disponible sur Firebase prêt à accueillir les fichiers de l'application.
+
+
+
 
 
 
