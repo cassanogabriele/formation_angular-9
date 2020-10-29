@@ -145,15 +145,19 @@ Voilà une classe JavaScript, bien différente de ce que l'on avait précéd
 Le nouveau mot-clef let
 Le mot-clé let permet de déclarer une variable locale, dans le contexte où elle a été assignée. (Un contexte est le terme français pour désigner un le $scope dans AngularJS, ou scope en anglais). 
 Par exemple, les instructions que vous écrivez dans le corps d'une fonction ou à l'extérieur n'ont pas le même contexte. Normalement une instruction if n'a pas de contexte en soi, mais maintenant si, avec le mot clé let. Cela peut être utile quand on veut effectuer beaucoup d'opérations sur une variable et que vous ne voulez pas polluer d'autres contextes des variables qui ne sont pas nécessaires dans d'autres contextes : 
-1.	var x = 1;
-2.	 
-3.	if(x < 10) { 
-4.	  let v = 1; 
-5.	  v = v + 21;
-6.	  console.log(v);
-7.	} 
-8.	 
-9.	console.log(v); // v n'est pas définie, car v a été déclaré avec 'let' et non 'var'.
+
+```
+var x = 1;
+
+if(x < 10) { 
+ let v = 1; 
+ v = v + 21;
+ console.log(v);
+}
+
+console.log(v); // v n'est pas définie, car v a été déclaré avec 'let' et non 'var'.
+```
+
 •  En général, garder un contexte global propre est vivement conseillé, et c'est pourquoi ce mot clé let est vraiment le bienvenu ! Sachez que let a été pensé pour remplacer var, alors nous n'allons pas nous en priver dans ce cours.
 Le nouveau mot-clef const
 •  Le mot clé const quant à lui, permet de déclarer ... des constantes ! Voyons comment cela fonctionne: 
@@ -165,35 +169,52 @@ Les fonctions fléchées
 •  Les fonctions fléchées, ou arrow functions, ne sont pas des fonctions classiques, parce qu’elles ne définissent pas un nouveau contexte comme les fonctions traditionnelles. Nous les utiliserons beaucoup dans le cadre de la programmation asynchrone qui nécessite beaucoup de fonctions anonymes. 
 •  La structure d'une fonction fléchée est toujours la même: (paramètre) => { corps de la fonction }. 
 •  La fonction suivante:
-1.	bouton.onclick = function() {
-2.	  envoyerMail(this.email);
-3.	}
+```
+bouton.onclick = function() {
+  envoyerMail(this.email);
+}
+```
 •  Correspond donc à la fonction fléchée suivante:
 •  bouton.onclick = () => { envoyerEmail(this.email); } 
 •  Je vous conseille de vous habituer dès maintenant à cette nouvelle syntaxe, et nous allons l'utiliser tout le temps ! 
 Les paramètres de fonctions par défaut
 •  En JavaScript ES6, on peut définir facilement des paramètres de fonctions avec une valeur par défaut.
 •  Imaginons une fonction qui multiplie deux nombres passés en paramètres, mais le deuxième paramètre est facultatif, et il vaut 1 par défaut: 
-1.	function multiplier(a, b = 1) {
-2.	  return a * b;
-3.	}
+
+```
+function multiplier(a, b = 1) {
+ return a * b;
+}
+```
+
 •  Avec ES6, il suffit de définir une valeur par défaut dans la signature même de la fonction. C'est très pratique ! 
 La syntaxe template string
 •  La concaténation de chaîne de caractère a toujours été pénible avec JavaScript.
-Mais avec ES6, on peut utiliser des templates strings, qui commencent et se terminent par un backtick (`). Il s'agit d'un symbole particulier qui permet d'insérer facilement des variables dans des chaînes de caractères. On peut insérer des variables dans la chaîne de caractères avec ${variable}, comme ceci:
-1.	•  let name = 'toto';
-2.	let email = 'toto@gmail.com';
-3.	console.info(‘${name} a pour email: ${email}’);
+Mais avec ES6, on peut utiliser des templates strings, qui commencent et se terminent par un backtick. Il s'agit d'un symbole particulier qui permet d'insérer facilement des variables dans des chaînes de caractères. On peut insérer des variables dans la chaîne de caractères avec ${variable}, comme ceci:
+
+```
+let name = 'toto';
+let email = 'toto@gmail.com';
+console.info(‘${name} a pour email: ${email}’);
+```
+
 •  C'est quand même plus pratique que de concaténer des chaines de caractères entre elles !
 Conclusion
 Nous avons vu plusieurs changements majeurs apporté par ES6 à Javascript. Sachez que ES6 est rétro-compatible, donc vous pouvez toujours continuer à développer de la façon dont vous le faites actuellement, puis migrer petit à petit vers la syntaxe d'ES6. Je vous recommande d'adopter ES6 assez rapidement, vous gagnerez en productivité et en lisibilité avec cette nouvelle syntaxe. 
+
 Même si les nouveautés de ES6 ne fonctionnent pas encore dans certains navigateurs, beaucoup de développeurs ont commencé à développer avec ES6 et utilisent un transpilateur pour convertir leur code ES6 en du code ES5. Ainsi leur code est lisible par tout les navigateurs.
 Un transpilateur est un outil qui permet de publier son code pour les navigateurs qui ne supportent pas encore l'ES6: le rôle du transpilateur est de traduire le code ES6 en code ES5. Comme certaines fonctionnalités d'ES6 ne sont pas disponibles avec ES5, leur comportement est simulé pour permettre aux navigateurs plus anciens de comprendre le code.
+
 Dans la prochaine session, nous verrons que TypeScript permet de transpiler notre code ES6 en ES5, et ajoute une surcouche intéressante au JavaScript afin de pouvoir typer nos variables JavaScript. Et ça, c'est assez nouveau dans le monde du JavaScript !
-Angular et TypeScript
-C'est quoi, TypeScript ?
+
+## Angular et TypeScript
+
+## C'est quoi, TypeScript ?
+
 Nous allons aborder un des piliers d'Angular : TypeScript. Certains d'entre vous en ont peut-être déjà entendu parler, mais les autres ne vous en faites pas, nous allons démystifier tout cela immédiatement !
-Avant de voir plus en détail ce que nous allons faire avec ce langage, et parce que je ne suis pas toujours inspiré, je vous propose de commencer par la définition de Wikipédia:
+Avant de voir plus en détail ce que nous allons faire avec ce langage, et parce que je ne suis pas toujours inspiré, je vous propose de commencer par la définition de 
+
+## Wikipédia
 TypeScript est un langage de programmation libre et open-source, développé par Microsoft, qui a pour but d'améliorer et de sécuriser la production de code JavaScript. C'est un sur-ensemble de JavaScript (c'est-à-dire que tout code Javascript correct peut être utilisé avec TypeScript). Le code TypeScript est transcompilé en JavaScript, pouvant ainsi être interprété par n'importe quel navigateur web ou moteur JavaScript.
 Je n'aurai pas été plus clair. Mais je vous rassure on va creuser tout ça tout de suite, je ne vais pas vous laisser avec une simple définition de Wikipédia. 
 Les faiblesses du langage JavaScript font que lorsque l'on commence à écrire beaucoup de code, on arrive vite à un moment où on s'emmêle les pinceaux ! Notre code devient redondant, perd en élégance, et devient de moins en moins lisible : on parle de code spaghetti. Vous comprendrez tous seuls la référence aux célèbres pâtes italiennes ! ;)
@@ -205,26 +226,39 @@ Il est chaudement recommandé d'utiliser TypeScript pour développer en Angular.
 En bonus, Angular lui-même est développer avec TypeScript. C'est pour cela que nous utiliserons TypeScript dans ce cours !
 Le typage avec TypeScript
 Voici comment typer nos variables avec TypeScript:
-1.	var pointDeVie: number = 100; 
-2.	var surnom: string = 'Green Lantern'; 
+
+```
+var pointDeVie: number = 100; 
+var surnom: string = 'Green Lantern'; 
+```
+
 Comme vous pouvez le constater, il suffit d'ajouter deux points et le type de votre variable pour typer une variable en TypeScript. J'ai jouté en ressource la liste de tous les types de base disponibles avec TypeScript.
 TypeScript et les fonctions
 On peut aussi typer les paramètres et la valeur de retour d'une fonction, toujours avec la syntaxe des deux points:
-1.	function creerHeros(pointDeVie: number, surnom: string): Heros {
-2.	  var heros = new Heros(); 
-3.	  heros.pointDeVie = pointDeVie; 
-4.	  heros.surnom = surnom; 
-5.	  return heros; 
-6.	}
-Les décorateurs
+
+```
+function creerHeros(pointDeVie: number, surnom: string): Heros {
+  var heros = new Heros(); 
+  heros.pointDeVie = pointDeVie; 
+  heros.surnom = surnom; 
+  return heros; 
+}
+```
+## Les décorateurs
+
 Les annotations TypeScript permettent d'ajouter des informations sur nos classes, pour indiquer par exemple que telle classe est un composant de l'application, ou telle autre un service. On utilise @ comme syntaxe:
-1.	@Component({
-2.	  selector: 'mon-composant',
-3.	  template: 'mon-template.html'
-4.	})
-5.	export class MonComposant {}
+
+```
+@Component({
+ selector: 'mon-composant',
+ template: 'mon-template.html'
+})
+
+export class MonComposant {}
+```
 On utilisera beaucoup cette syntaxe lors de nos développements avec Angular.
-Conclusion
+
+## Conclusion
 TypeScript apporte évidemment d'autres fonctionnalités : les valeurs énumérées, les interfaces, la généricité, etc.
 TypeScript est donc un méta-langage qui est surtout connu pour apporter le typage à JavaScript, mais il s'agit également d'un transpilateur, capable de générer du code vers ES5 ou ES6 !
 L'objectif de cette section était que vous preniez rapidement connaissance de TypeScript, pour voir ensuite son fonctionnement concret dans une application Angular. Si vous voulez pousser plus loin vos connaissances en TypeScript, je vous invite à regarder la documentation officielle que j'ai ajouté en ressource de cette session.
@@ -236,28 +270,35 @@ Angular et les Web Components
 Les Web Components utilisent des capacités standards, nouvelles ou en cours de développements, des navigateurs. Il s'agit de technologies récentes qui ne sont pas encore supportées par tous les navigateurs. Pour les utiliser dès aujourd'hui, nous devrons utiliser des polyfills pour combler les lacunes de couverture des navigateurs.
 Un polyfill est un ensemble de fonction, souvent sous forme de scripts JavaScript, permettant de simuler sur un navigateur web ancien des fonctionnalités qui ne sont pas nativement disponibles.
 Les Web Components sont composés de quatre technologies différentes, qui peuvent chacune être utilisées séparément, mais qui une fois assemblées forme le standard des Web Components :
+
 1.	Les éléments personnalisés (Custom Elements) permettent de créer ses propres éléments HTML valides.
 2.	Le DOM de l'ombre (Shadow DOM) permet d'encapsuler du code HTML, CSS et JavaScript qui n'interfère pas avec le DOM principal de la page web.
 3.	Les templates HTML (HTML Templates) permettent de développer des morceaux de code HTML qui ne sont pas interprétés au chargement de la page.
 4.	Les imports HTML (HTML Imports) permettent d'importer du HTML dans une autre page HTML.
+
 Pour ceux qui ne s'en souviennent plus, le DOM est une représentation de votre code HTML sous forme d'arbre. Ainsi un élément <ul>  a des éléments fils <li> . L'élément racine du DOM est donc la balise <html> .
-Conclusion
+	
+## Conclusion
 Je ne vais pas vous présenter chacune de ces technologies pour le moment, le plus important est que vous compreniez pourquoi telle ou telle technologie a été créer, et à quoi elle sert. Retenez que les composants web permettent d'encapsuler une partie de votre page dans un composant, et que les composants Angular repose sur ce standard des Composants Web.
-En résumé
+
+## En résumé
+
 1.	Les sites web deviennent de plus en plus de véritables applications, et une utilisation intensive du langage JavaScript devient nécessaire.
 2.	Angular est un Framework orienté composant, car votre application entière est un assemblage de composants.
 3.	Angular est conçu pour le web de demain et intègre déjà la norme ECMAScript6 (ou ES6) et les Web Components.
 4.	Enfin, retenez que tout cet écosystème est bourgeonnant et change (très) vite. Soyez persévérant lors de votre apprentissage et ne vous découragez pas. Vous prendrez vite plaisir à utiliser Angular !
-Avant de continuer : Angular 6
+
+## Avant de continuer : Angular 6
 Dans la suite de ce cours, tous les extraits de code et la correction de l'application sont à jour pour Angular 6.
 Cependant, la plupart des vidéos ont été tournées pour la version 5 d'Angular. Il y a donc quelques vidéos dans la session Premiers pas avec Angular et Effectuer des requêtes HTTP où j'utilise du code adapté uniquement pour la version 5 d'Angular. 
 Je vous invite donc simplement à récupérer la version plus récente des fichiers concernés, qui sont indiqués en ressource de chaque vidéo de la formation. Je mettrai prochainement les vidéos concernées à jour, et je vous tiendrai informé grâce aux annonces Udemy.
 
-
-Installer NodeJS et NPM
+## Installer NodeJS et NPM
 Pour installer les dépendances de notre projet Angular que nous avons renseigné dans le fichier package.json, nous allons utiliser un petit outil bien pratique pour cela, nommé NPM (Node Package Manager).
-Pour cela, il est nécessaire d'installer NodeJS, qui permet d'exécuter du code javaScript côté serveur. NodeJS ne nous sert pas directement dans cette formation, mais il permet d'installer NPM, qui va nous permettre d'exécuter des commandes "npm ..." sur notre machine. 👨🏻💻
+Pour cela, il est nécessaire d'installer NodeJS, qui permet d'exécuter du code javaScript côté serveur. NodeJS ne nous sert pas directement dans cette formation, mais il permet d'installer NPM, qui va nous permettre d'exécuter des commandes "npm ..." sur notre machine. 
+
 Voici le lien pour télécharger NodeJS sur Windows, Mac ou Linux :
+
 👉 https://nodejs.org/fr/download
 Dès que l'installation est terminée sur votre poste, vous êtes prêt à passer à la suite !
 Cas où votre application ne démarre pas
@@ -270,46 +311,20 @@ Si votre application ne démarre pas correctement lorsque vous lancer la command
 J'espère que cela corrigera votre erreur. 
 Si ça n'est toujours pas le cas, vous pouvez récupérer la correction dans les ressources de la correction. Ensuite lancez les commandes npm install et npm start, et vous devriez avoir un environnement de travail prêt pour continuer la formation. :)
 
+##En résumé
 
-
-
-En résumé
 1.	SystemJS est la bibliothèque par défaut choisie par Angular pour charger les modules.
 2.	On a besoin au minimum d'un module racine et d'un composant racine par application.
 3.	Le module racine se nomme par convention AppModule.
 4.	Le composant racine se nomme par convention AppComponent.
 5.	L'ordre de chargement de l'application est le suivant : index.html > main.ts > app.module.ts > app.component.ts.
 6.	Le fichier package.json initial est fourni avec des commandes prêtes à l'emploi comme la commande npm start, qui nous permet de démarrer notre application web.
-Quizz
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-Ce que vous savez
-•	Quelle entreprise est à l'origine d'Angular ?
-•	Quel est le langage recommandé pour le développement d'applications Angular ?
-•	Quel est le standard ci-dessous qui ne fait pas partie du standard des WebComponents ?
-•	Comment appelle-t-on le module à la base de toute application Angular ?
-Ce que vous devriez revoir
-•	Complétez la phrase suivante :Angular est un Framework orienté ...
-•	A quoi sert un transpileur ?
-•	Les navigateurs sont-ils capables d'interpréter le TypeScript directement ?
-•	Est-il possible d'avoir plusieurs DOM de l'ombre sur une même page web ?
-
-
-
-
-Les cycles de vie d'un composant 
+## Les cycles de vie d'un composant 
 Chaque composant a un cycle de vie géré par Angular lui-même. Angular crée le composant, s'occupe de l'afficher, crée et affiche ses composants fils, vérifie quand les données des propriétés changent, et détruit les composants, avant de les retirer du DOM quand cela est nécessaire. Pratique, non ?
 Angular nous offre la possibilité d'agir sur ces moments clefs quand ils se produisent, en implémentant une ou plusieurs interfaces, pour chacun des événements disponibles. Ces interfaces sont disponibles dans la librairie core d'Angular. 
 Chaque interface permettant d'interagir sur le cycle de vie d'un composant fournit une et une seule méthode, dont le nom est le nom de l'interface préfixé par ng. Par exemple, l'interface OnInit fournit la méthode ngOnInit, et permet de définir un comportement lorsque le composant est initialisé. 
 Voici ci-dessous la liste des méthodes disponibles pour interagir avec le cycle de vie d'un composant, dans l'ordre chronologique du moment où elles sont appelées par Angular.
+
 1.	ngOnChanges: C'est la méthode appelée en premier lors de la création d'un composant, avant même ngOnInit, et à chaque fois que Angular détecte que les valeurs d'une propriété du composant sont modifiées. La méthode reçoit en paramètre un objet représentant les valeurs actuelles et les valeurs précédentes disponibles pour ce composant. 
 2.	ngOnInit: Cette méthode est appelée juste après le premier appel à ngOnChanges, et elle initialise le composant après qu’Angular ait initialisé les propriétés du composant. 
 3.	ngDoCheck: On peut implémenter cette interface pour étendre le comportement par défaut de la méthode ngOnChanges, afin de pouvoir détecter et agir sur des changements qu’Angular ne peut pas détecter par lui-même. 
@@ -328,20 +343,16 @@ Si votre application ne démarre pas correctement lorsque vous lancer la command
 - Lancer la commande npm run build:watch, puis dans un autre terminal, lancer la commande npm run serve.
 J'espère que cela corrigera votre erreur. 
 Si ça n'est toujours pas le cas, vous pouvez récupérer la correction dans les ressources de la correction. Ensuite lancez les commandes npm install et npm start, et vous devriez avoir un environnement de travail prêt pour continuer la formation. :)
-En résumé
-En résumé
+
+## En résumé
 1.	SystemJS est la bibliothèque par défaut choisie par Angular pour charger les modules.
 2.	On a besoin au minimum d'un module racine et d'un composant racine par application.
 3.	Le module racine se nomme par convention AppModule.
 4.	Le composant racine se nomme par convention AppComponent.
 5.	L'ordre de chargement de l'application est le suivant : index.html > main.ts > app.module.ts > app.component.ts.
 6.	Le fichier package.json initial est fourni avec des commandes prêtes à l'emploi comme la commande npm start, qui nous permet de démarrer notre application web.
-Plein écran
-29. Conclusion
-Quiz 1 : Questionnaire n°1
 
-Les cycles de vie d'un composant
-Les cycles de vie d'un composant 
+## Les cycles de vie d'un composant 
 Chaque composant a un cycle de vie géré par Angular lui-même. Angular crée le composant, s'occupe de l'afficher, crée et affiche ses composants fils, vérifie quand les données des propriétés changent, et détruit les composants, avant de les retirer du DOM quand cela est nécessaire. Pratique, non ?
 Angular nous offre la possibilité d'agir sur ces moments clefs quand ils se produisent, en implémentant une ou plusieurs interfaces, pour chacun des événements disponibles. Ces interfaces sont disponibles dans la librairie core d'Angular. 
 Chaque interface permettant d'interagir sur le cycle de vie d'un composant fournit une et une seule méthode, dont le nom est le nom de l'interface préfixé par ng. Par exemple, l'interface OnInit fournit la méthode ngOnInit, et permet de définir un comportement lorsque le composant est initialisé. 
@@ -355,35 +366,8 @@ Voici ci-dessous la liste des méthodes disponibles pour interagir avec le cycl
 Même si vous ne définissez pas explicitement des méthodes de cycle de vie dans votre composant, sachez que ces méthodes sont appelées en interne par Angular pour chaque composant. Lorsqu'on utilise ces méthodes, on vient donc juste surcharger tel ou tel événement du cycle de vie d'un composant. 
 
 Les méthodes que vous utiliserez le plus seront certainement ngOnInit et ngOnDestroy, qui permettent d'initialiser un composant, et de le nettoyer proprement par la suite lorsqu'il est détruit. 
-Exercice
-Un peu de pratique !
-Bon passons à la pratique, et essayons d'enrichir quelque peu le composant app.component.ts de notre application. Je propose d'ajouter deux fonctionnalités que nous venons de voir: 
-1.	Injecter une liste de Pokémons dans le composant. 
-2.	Préparer une méthode qui devra gérer l'action lorsque l'utilisateur cliquera sur un Pokémon de cette liste.
-Mais avant de vous laisser chercher tout seul, je me dois de vous donner deux choses : 
-3.	Une classe permettant de modéliser un Pokémon. 
-4.	Un fichier contenant quelques Pokémons à injecter dans notre composant, à titre d'exemple. 
-Le modèle
-Créer un fichier pokemon.ts dans le dossier app de notre projet, avec le code suivant : 
-1.	export class Pokemon {
-2.	  id: number;
-3.	  hp: number;
-4.	  cp: number;
-5.	  name: string;
-6.	  picture: string;
-7.	  types: Array<string>;
-8.	  created: Date;
-9.	}
-Cette classe a pour rôle de représenter un Pokémon dans notre application. Chaque Pokémon aura donc : 
-1.	 Id: un identifiant unique sous forme de nombre. 
-2.	Hp: le nombre de points de vie du Pokémon.
-3.	Cp: le nombre de dégâts d'un Pokémon.
-4.	Name: un nom. 
-5.	Picture: l'url d'une image représentant le Pokémon. 
-6.	Types: un tableau contenant les types du Pokémon (Eau, Feu, Vol, etc...). 
-7.	Created: la date de création du Pokémon. 
 
-Les données
+## Les données
 Maintenant, créons un fichier mock-pokemons.ts qui contiendra les données de plusieurs Pokémons. Ce fichier doit être placé dans le dossier src/app (le fichier est un peu long, mais il s'agit simplement de données mises à disposition pour notre application). Etant donné que nous n’allons pas modifier ce fichier dans la suite du cours, je vous propose de le copier directement à partir de l’adresse suivante.
 Comme vous pouvez le constater, ce fichier ne fait qu'exporter la constante POKEMONS, qui contient des données nécessaires pour notre application.
 Maintenant, vous avez tous les éléments nécessaires pour améliorer le composant app.component.ts de notre application. Pour rappel, voici ce que vous devez faire :
@@ -397,20 +381,18 @@ Du composant vers le template
 Nous pouvons pousser plusieurs données depuis le composant vers le template. Voici les liaisons que nous pouvons mettre en place :
 La liaison sur une propriété d'élément
 On utilise les crochets pour lier directement la source de l'image à la propriété someImageUrl du composant : 
-<img [src]="someImageUrl"> 
+```<img [src]="someImageUrl"> ```
 La liaison sur une propriété d'attribut
 On lie l'attribut for de l'élément label avec la propriété de notre composant someLabelId :
-<label [attr.for]="someLabelId">...</label> 
+```<label [attr.for]="someLabelId">...</label>``` 
 La liaison sur une propriété de la classe
 Fonctionnement similaire, pour attribuer ou non la classe special à l'élément div ci-dessous :
-<div [class.special]="isSpecial">Special</div> 
+```<div [class.special]="isSpecial">Special</div> ```
 La liaison sur une propriété de style
 On peut également définir un style pour nos éléments de manière dynamique : ici on définit la couleur de notre bouton en fonction de la propriété isSpecial, soit rouge, soit vert. C'est un opérateur ternaire que l'on utilise comme expression :
-<button [style.color]="isSpecial ? 'red' : 'green'"> 
+```<button [style.color]="isSpecial ? 'red' : 'green'"> ```
 
-Note : Nous verrons les liaisons bidirectionnelles dans le chapitre dédié sur les Formulaires, où nous en auront vraiment besoin. Cela permet de décharger un peu ce chapitre.
-En résumé
-En résumé
+## En résumé
 1.	L'interpolation permet d'afficher les propriétés de nos composants dans les templates, via la syntaxe {{ }}.
 2.	On peut lier une propriété d'élément, d'attribut, de classe ou de style d'un composant vers le template.
 3.	Si nos templates sont trop long, on peut utiliser le backtick d'ES6, ou définir nos templates dans des fichiers séparés.
@@ -420,8 +402,8 @@ En résumé
 7.	On peut référencer des variables directement dans le template plutôt que de manipuler l'objet $event.
 8.	Les variables référencées dans le template sont accessibles pour tous les éléments fils et frères de l'élément dans lequel elle ont été déclarées.
 9.	Essayez d'éviter de mettre la logique de votre application dans vos templates. Gardez-les le plus simple possible !
-En résumé
-En résumé
+
+## En résumé
 1.	On utilise l'annotation @Directive pour déclarer une directive dans notre application.
 2.	Il existe trois types de directives différentes : les composants, les directives d'attributs et les directives structurelles (ngFor et ngIf par exemple).
 3.	Une directive d'attribut permet d'agir avec les éléments HTML d'une page, en leur attachant un comportement spécifique.
@@ -430,7 +412,8 @@ En résumé
 6.	Angular crée une nouvelle instance de notre directive à chaque fois qu'il détecte un élément HTML avec l'attribut correspondant. Il injecte alors dans le constructeur de la directive l'élément du DOM ElementRef.
 7.	Il faut déclarer notre directive pour pouvoir l’utiliser.
 8.	On utilise l'annotation @HostListener pour gérer les interactions de l'utilisateur au sein d'une directive.
-En résumé
+
+## En résumé
 1.	Les pipes permettent de formater les données affichées dans nos templates.
 2.	L'opérateur des pipes est « | ».
 3.	Angular fournit des pipes prêts à l'emploi, disponibles dans tous les templates de notre application : DatePipe, UpperCasePipe, LowerCasePipe, etc.
@@ -438,27 +421,7 @@ En résumé
 5.	On peut créer des pipes personnalisés pour les besoins de notre application avec l'annotation @Pipe.
 6.	Les pipes personnalisés doivent être déclarés avant de pouvoir être utilisés dans les templates de composants. 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-En résumé
-En résumé
+## En résumé
 1.	Il existe deux types de modules : le module racine et les modules de fonctionnalité, appelés également sous-modules. 
 2.	On déclare un module avec l'annotation @NgModule, quel que soit le type du module. 
 3.	On peut créer des applications complexes en ajoutant des modules de fonctionnalité au module racine.
@@ -474,18 +437,8 @@ En résumé
 5.	L'injection de dépendance permet de garantir que l'instance de notre service est unique à travers toute l'application.
 6.	On définit un fournisseur de service pour déterminer dans quelles zones de notre application notre service sera disponible.
 7.	On peut fournir un service pour toute l'application, pour un module particulier ou pour un composant. 
-Quizz
- 
- 
- 
- 
- 
- 
- 
- 
- 
-En résumé
-En résumé
+
+## En résumé
 1.	Il y a deux modules différents pour développer des formulaires avec Angular: FormsModule et ReactiveFormsModule. 
 2.	Le module FormsModule est pratique pour développer des formulaires de petites tailles, et met à disposition les directives NgForm et NgModel. 
 3.	La directive NgModel ajoute et retire certaines classes au champ sur lequel elle s'applique. Ces classes peuvent être utilisées pour afficher des messages d'erreurs ou de succès, et des indicateurs visuels. 
@@ -512,35 +465,26 @@ npm install --save-dev angular-in-memory-web-api
 (L'option --save-dev permet de sauvegarder ce paquet directement dans la section devDependencies de votre fichier package.json)
 Une fois la commande exécutée (ou alors si vous disposez déjà du fichier package.json à jour), vous pouvez continuer le cours sereinement.
 
-
-
-
-
-Modification de l'importation de l'opérateur "of"
-Modification de l'importation de l'opérateur "of"
+## Modification de l'importation de l'opérateur "of"
 Comme vu précédemment, remplacer l'importation de l'opérateur "of" du fichier pokemons.service.ts: 
 import { of } from 'rxjs/observable/of'; // RxJS 5, importation dépréciée.
 Par la nouvelle importation :
 import { of } from 'rxjs'; // RxJS 6, à utiliser.
-En résumé
-En résumé
+
+## En résumé
 1.	Il est possible de mettre en place une API web de démonstration au sein de votre application. Cela vous permettra d'interagir avec un jeu de données configuré à l'avance.
 2.	Les Observables permettent de faciliter la gestion des événements asynchrones.
 3.	Les Observables sont adaptés pour gérer des séquences d'événements.
 4.	Les opérateurs RxJS ne sont pas tous disponibles dans Angular. Il faut étendre cette implémentation en important nous-même les opérateurs nécessaires.
-En résumé
+
+## En résumé
 1.	L'authentification nécessite la mise en place d'un système fiable: on utilise pour cela les Guards.
 2.	Les Guards permettent de gérer toutes sortes de scénarios liés à la navigation: redirection, connexion, etc.
 3.	Les Guards reposent sur un mécanisme simple. Ils retournent un booléen de manière synchrone ou asynchrone, qui permet d'influencer le processus de navigation.
 4.	Il existe plusieurs types de Guards différents. Le type utilisé pour l'authentification est CanActivate.
 5.	Il faut toujours déclarer les Guards au niveau du module racine, ainsi que les services tiers qu'ils utilisent. 
 
-
-
-
-
-Fixer la version de la dépendance core-js
-Fixer la version de la dépendance core-js
+## Fixer la version de la dépendance core-js
 Lors de l'écriture et du tournage de ce cours, je dois vous avouer que j'ai commis une erreur. 
 A la ligne 10, je vous ai demandé de modifier l'importation de core-js comme suit :
 <script src="https://unpkg.com/core-js/client/shim.min.js"></script>
@@ -548,29 +492,15 @@ Le problème avec ce code, c'est que je n'ai pas figé cette dépendance au mome
 Il faut donc fixer le paquet core-js en version 2.5.4 pour que votre application continue à fonctionner. Je vous invite donc à effectuer la modification suivante, à la ligne 10 de votre fichier index.html :
 <script src="https://unpkg.com/core-js@2.5.4/client/shim.min.js"></script>
 Désormais, votre application fonctionnera lorsque vous la déploierai.
-En résumé
-En résumé
+
+## En résumé
 1.	Le déploiement est une étape dans un projet qui consiste à faire fonctionner une application sur l'environnement de production. 
 2.	Avant de déployer un projet local sur une machine de développement, il est nécessaire de prévoir une étape d'optimisation. 
 3.	Le site unpkg.com permet de charger des paquets npm depuis le web. 
 4.	Firebase propose un utilitaire en ligne de commande nommé Firebase-CLI, afin de déployer en ligne facilement des applications web statiques. Cela fonctionne aussi pour les applications web statiques qui ne sont pas développées avec Angular.
 5.	Je vous recommande de lire la documentation officielle pour mieux connaître toutes les optimisations possibles que vous pouvez faire en local, avant le déploiement.
 
-
-
-
-
-Questionnaire 
- 
- 
- 
- 
- 
- 
- 
- 
-
-Introduction
+## Introduction
 Actuellement, nous sommes capables de définir un titre pour les pages de notre application, en ajoutant la balise <title> dans le fichier index.html. Cependant, notre application devrait être en mesure de modifier ce titre dynamiquement en fonction de la page qui est affichée à l'utilisateur. Nous allons voir dans cette session comment le faire.
 Pour information, un des éléments de base de toute stratégie de référencement est l'optimisation de la balise <title> !
 Le problème avec la balise <title>
@@ -584,43 +514,42 @@ En fait, le problème n'est pas là. Le composant racine de votre application es
 Nous pourrions récupérer l'objet du navigateur nommé document et définir le titre manuellement. Mais ce n'est pas très propre et compromet nos chances d'exécuter un jour l'application en dehors du navigateur.
 NB: Pour rappel, vous n'êtes pas obligé d'exécuter votre application à l'intérieur d'un navigateur ! Vous pouvez développez des applications mobiles hybrides avec Ionic ou NativeScript. Vous pouvez également utiliser Electron.js ou Windows Universal pour développer des applications à destination des clients de bureaux lourds.
 
-
-
-
-Utiliser le service Title
+## Utiliser le service Title
 Heureusement, Angular fournit un service nommé Title. Ce service est une simple classe, qui fournit deux méthodes pour récupérer et modifier le titre du document HTML courant.
 1.	getTitle() : string —Récupère le titre du document HTML courant.
 2.	setTitle(newTitle : string) — Définit un nouveau titre pour le document HTML courant.
 La classe de ce service est disponible sur la documentation officielle.
 Maintenant nous allons utiliser ce service Title. Il faut injecter le service dans le composant où l'on souhaite l'utiliser. Etant donné que ce service est appelé à être utilisé dans toute l'application, nous allons l'injecter dans le composant racine, AppComponent. Ensuite on peut définir un titre à la page, grâce à la méthode setTitle, à la ligne 5:
-1.	01 export class AppComponent implements OnInit {
-2.	02  public constructor(private titleService: Title) {}
-3.	03  
-4.	04  ngOnInit() {
-5.	05   this.titleService.setTitle("Mon Titre !");  
-6.	06  }
-7.	07 }
+```
+export class AppComponent implements OnInit {
+ public constructor(private titleService: Title) {}
+ ngOnInit() {
+  this.titleService.setTitle("Mon Titre !");  
+}
+}
+```
+
 Il n'y a rien d'extraordinaire dans ce code. Nous utilisons le mécanisme classique d'injection de dépendance pour rendre le service disponible dans le composant.
 Bien entendu, il faut également ajouter un fournisseur pour ce service, dans le module racine de notre application:
-1.	01 import { NgModule } from '@angular/core';
-2.	02 
-3.	03 import { BrowserModule, Title } from '@angular/platform-browser'; // on importe le service 'Title'
-4.	04 import { AppComponent } from './app.component';
-5.	05 
-6.	06 @NgModule({
-7.	07   imports: [
-8.	08     BrowserModule
-9.	09   ],
-10.	10   declarations: [ AppComponent ],
-11.	11   providers: [ 
-12.	12     Title // on fournis le service 'Title' à l'ensemble de l'application 
-13.	13   ],
-14.	14   bootstrap: [ AppComponent ]
-15.	15 })
-16.	16 export class AppModule { }
+```
+import { NgModule } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser'; // on importe le service 'Title'
+import { AppComponent } from './app.component';
 
+@NgModule({
+  imports: [
+   BrowserModule
+],
 
-Conclusion
+declarations: [ AppComponent ],
+ providers: [ 
+  Title // on fournis le service 'Title' à l'ensemble de l'application 
+],
+bootstrap: [ AppComponent ]
+})
+export class AppModule { }
+```
+## Conclusion
 Vous savez désormais comment définir des titres dynamiques pour vos pages. Vous pouvez proposer une expérience plus agréable à vos utilisateurs, en précisant le titre de la page sur laquelle ils se trouvent dans l'onglet du navigateur. J'espère que vous n'hésiterez pas à utiliser ce service dans vos projets !
 En résumé
 1.	Il n'est pas possible d'utiliser l'interpolation pour définir un titre à vos documents.
@@ -635,9 +564,7 @@ Si vous êtes à la recherche de ce guide pour connaître la syntaxe, les conven
 Le but de ce chapitre est de résumer les recommandations officielles, et voir pourquoi ce sont elles qui ont été retenues. Ensuite je vous présenterai deux outils pour vous permettre d'appliquer ces recommandations, sans avoir à relire tout votre code vous-même.
 Il n'est pas important de connaître TOUTES les recommandations. Retenez juste celles qui sont les plus importantes pour vous et gardez-les dans un coin de votre tête pour vos futurs développements.
 
-
-
-Le principe de responsabilité unique
+## Le principe de responsabilité unique
 Il est recommandé d'appliquer ce principe à tous vos composants, vos services et autres éléments. Il permet de rendre votre application plus facile à lire, à maintenir et à tester.
 Règle 1
 Définir un seul élément par fichier : un composant, un module ou un service, par exemple.
@@ -652,11 +579,12 @@ Essayer de limiter vos fonctions à 75 lignes.
 Les conventions de nommage
 Les conventions de nommage
 Les conventions de nommage sont importantes pour la cohésion de votre application. Nous allons voir que ces conventions s'appliquent aux noms des fichiers, et aussi aux noms des éléments eux-mêmes : composants, services, etc ...
-Règle 1
+
+## Règle 1
 Utilisez des noms de fichiers consistants pour les éléments que vous définissez : feature.type.extension.
 Les noms de fichiers list-pokemons.component.ts, list-pokemons.component.html ou encore pokemons.service.ts respectent cette recommandation. Cela permet aux développeurs d'avoir une idée sur le contenu du fichier en un coup d'oeil. Cela permet également d'avoir une certaine consistance sur les noms des fichiers de l'application, ce qui est primordial lorsqu'on travaille en équipe.
 
-Règle 2
+## Règle 2
 Utilisez la syntaxe CamelCase pour nommer vos éléments, en suffixant leur nom avec leur type.
 De cette manière, vous pourrez identifier rapidement les éléments de votre application. Le tableau ci-dessous illustre l'application de cette règle :
 1.	Le composant AppComponent => app.component.ts.
@@ -665,52 +593,56 @@ De cette manière, vous pourrez identifier rapidement les éléments de votre ap
 4.	La feuille de style de PokemonListComponent => pokemon-list.component.css.
 5.	La directive AwesomeDirective => awesome.directive.ts.
 6.	Le service PokemonsService => pokemons.service.ts.
-Règle 3
+
+##Règle 3
 Utiliser la syntaxe kebab-case pour nommer les sélecteurs de vos directives.
 Cette règle peut sembler évidente car les sélecteurs de vos directives seront liés aux attributs d'un élément HTML, qui ont des noms définis en minuscule. De plus, le parseur HTML d'Angular est sensible à la casse, donc vous n'avez pas le choix !
 Règle 4
 Utiliser un préfixe personnalisé pour les sélecteurs de vos composants et directives. Par exemple, le préfixe pa pour l'application Pokemon-App ou admin pour une zone dédiée aux fonctionnalités d'administration.
 Préfixer les sélecteurs de vos composants et de vos directives ne coûte pas grand chose, et permet d'éviter les collisions dans votre application : 
-1.	01 @Component({
-2.	02   selector: 'pa-pokemon'
-3.	03 })
-4.	04 export class PokemonComponent {}
-5.	05
-6.	06 @Component({
-7.	07   selector: 'admin-users'
-8.	08 })
-9.	09 export class UsersComponent {}
-10.	10 
-11.	11 @Directive({
-12.	12   selector: '[paValidate]'
-13.	13 })
-14.	14 export class ValidateDirective {}
+```
+@Component({
+ selector: 'pa-pokemon'
+})
+export class PokemonComponent {}
+ @Component({
+ selector: 'admin-users'
+})
 
-Les conventions de code
+export class UsersComponent {}
+ @Directive({
+ selector: '[paValidate]'
+})
+export class ValidateDirective {}
+```
 
-Règle 1
+## Les conventions de code
+
+## Règle 1
+
 Déclarez des constantes plutôt que des variables si leur valeur ne doit pas changer, avec la syntaxe camelCase plutôt que UPPER_SNAKE_CASE.
 Utiliser des constantes plutôt que des variables lorsque c'est nécessaire nous permet d'informer les autres développeurs que cette valeur est invariable. De plus, TypeScript nous aide en obligeant une initialisation immédiate et en empêchant une réaffectation ultérieure. La syntaxe camelCase a été retenue car elle est plus facile à lire que la syntaxe traditionnelle pour les constantes UPPER_SNAKE_CASE.
 Cependant, on retrouve souvent dans les librairies tierces cette syntaxe traditionnelle, qui est encore très populaire. C'est pourquoi cette syntaxe est tolérée, même s'il est recommandé de déclarer vos constantes avec camelCase:
 1.	01 export const mockPokemons = ['Salamèche', 'Bulbizzare']; // préférable
 2.	02 export const pokemonsUrl = 'api/pokemons'; // préférable
 3.	03 export const POKEMONS_URL = 'api/pokemons'; // toléré
-Règle 2
+
+## Règle 2
 Utilisez la syntaxe camelCase pour nommer vos propriétés et méthodes, et n'utilisez pas le préfixe underscore sur les propriétés privées !
 TypeScript fait très bien la différence entre une méthode privée ou publique, de même pour les propriétés. Ne vous embêtez pas à ajouter des underscores partout !
 Règle 3
 Séparez par un espace les importations des librairies tierces de celles que vous avez codées vous-même.
 La ligne vide vous permettra de rendre les importations plus faciles à lire et à localiser:
-1.	01 import { Component } from '@angular/core';
-2.	02 import { Http } from '@angular/http';
-3.	03 
-4.	04 import { Pokemon } from './pokemon.model';
-5.	05 import { OneService, AnotherService, LastService } from '../../shared';
-	
 
-
-La structure de l'application
+```
+import { Component } from '@angular/core';
+import { Http } from '@angular/http';
+import { Pokemon } from './pokemon.model';
+import { OneService, AnotherService, LastService } from '../../shared';
+```	
+## La structure de l'application
 Même si vous venez juste de commencer le développement de votre projet, ayez une vision à long terme de la mise en oeuvre de votre application en suivant les recommandations ci-dessous, dès le départ de votre projet:
+
 Règle 1
 LIFT : Localiser votre code rapidement, Identifier le code en un coup d'oeil, conserver la structure aussi Flat que possible (moins de sept fichiers pas dossier pour être plus exacte), et enfin « Try to be DRY ».
 DRY signifie “Don't Repeat Yourself”. C'est un adage connu des développeurs, qui invite à la centralisation et à la réutilisation d'éléments déjà développés, afin d'éviter de répéter plusieurs fois le même code.
