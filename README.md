@@ -124,20 +124,23 @@ PS: Pas besoin de tout retenir, survolez simplement la liste ci-dessous pour vou
 Les classes
 ES6 introduit une nouvelle syntaxe: le mot-clef class. C'est le même mot clé que dans d'autres langages, mais sachez que c'est toujours de l'héritage par prototype qui tourne derrière, mais vous n'avez plus à vous en soucier.
 
+```
+class Vehicule {
+ constructor(couleur, nombreRoueMotrice) {
+    this.couleur = couleur;    
+    this.nombreRoueMotrice = nombreRoueMotrice;    
+    this.moteurAllumer = false;    
+ }
 
-1.	class Vehicule {
-2.	  constructor(couleur, nombreRoueMotrice) {
-3.	    this.couleur = couleur;    
-4.	    this.nombreRoueMotrice = nombreRoueMotrice;    
-5.	    this.moteurAllumer = false;    
-6.	  }
-7.	  demarrer() {
-8.	   this.moteurAllumer = true;
-9.	  }
-10.	  couperMoteur() {
-11.	   this.moteurAllumer = false;
-12.	  }
-13.	}
+demarrer() {
+  this.moteurAllumer = true;
+}
+
+couperMoteur() {
+   this.moteurAllumer = false;
+ }
+}
+```
 Voilà une classe JavaScript, bien différente de ce que l'on avait précédemment. Si vous avez bien remarqué, on a même droit à un constructeur. C’est pas mal pour du JavaScript ! :)
 Le nouveau mot-clef let
 Le mot-clé let permet de déclarer une variable locale, dans le contexte où elle a été assignée. (Un contexte est le terme français pour désigner un le $scope dans AngularJS, ou scope en anglais). 
