@@ -633,17 +633,18 @@ TypeScript fait très bien la différence entre une méthode privée ou publique
 Règle 3
 Séparez par un espace les importations des librairies tierces de celles que vous avez codées vous-même.
 La ligne vide vous permettra de rendre les importations plus faciles à lire et à localiser:
-
 ```
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { Pokemon } from './pokemon.model';
-import { OneService, AnotherService, LastService } from '../../shared';
-```	
+```
+``` import { OneService, AnotherService, LastService } from '../../shared';```
+	
 ## La structure de l'application
 Même si vous venez juste de commencer le développement de votre projet, ayez une vision à long terme de la mise en oeuvre de votre application en suivant les recommandations ci-dessous, dès le départ de votre projet:
 
-Règle 1
+##Règle 1
+
 LIFT : Localiser votre code rapidement, Identifier le code en un coup d'oeil, conserver la structure aussi Flat que possible (moins de sept fichiers pas dossier pour être plus exacte), et enfin « Try to be DRY ».
 DRY signifie “Don't Repeat Yourself”. C'est un adage connu des développeurs, qui invite à la centralisation et à la réutilisation d'éléments déjà développés, afin d'éviter de répéter plusieurs fois le même code.
 Définissez la structure de votre application en respectant ces grandes lignes directrices, indiqué ici par ordre d'importance. Cela vous permettra de garder une architecture cohé- rente lorsque votre application se développera. Cette architecture modulaire permet aux développeurs de se repérer rapidement dans leur code.
@@ -658,46 +659,56 @@ Il est possible de créer un fichier qui importe, agrège, et réexporte des él
 Un barrel permet agréger plusieurs importations en une seule, ce qui réduit le nombre d'importations que l'on peut déclarer dans un fichier. On a souvent recours à un barrel pour exporter tous les éléments d'un même dossier :
 1.	01 import {CONFIG, EntityService, ExceptionService, SpinnerService, ToastService} from '../shared';
 Cette technique ne fonctionne que si le dossier shared contient un fichier index.ts avec le contenu suivant:
-1.	01 export * from './config';
-2.	02 export * from './entity.service';
-3.	03 export * from './exception.service';
-4.	04 export * from './filter-text';
-5.	05 export * from './init-caps.pipe';
-6.	06 export * from './modal';
-7.	07 export * from './nav';
-8.	08 export * from './spinner';
-9.	09 export * from './toast';
+```
+export * from './config';
+export * from './entity.service';
+export * from './exception.service';
+export * from './filter-text';
+export * from './init-caps.pipe';
+export * from './modal';
+export * from './nav';
+export * from './spinner';
+export * from './toast';
+```
 C'est assez pratique puisque nous n'avons plus qu'une ligne d'importation dans le reste de l'application !
-Les composants
-Règle 1
+
+##Les composants
+
+## Règle 1
 Utiliser la syntaxe kebab-case pour les sélecteurs de vos composants.
 Cette syntaxe vous permet de préfixer plus facilement vos sélecteurs avec un espace de nom.
-Règle 2
+##Règle 2
 Il faut extraire du composant les templates et la feuille de style du fichier quand ils font respectivement chacun plus de trois lignes.
 De plus, vous devez nommer le template et les feuilles de style de la même manière que le composant, en changeant juste l'extension du fichier :
-1.	[component-name].component.hml pour le template.
-2.	[component-name].component.css pour la feuille de style.
-Règle 3
+
+```[component-name].component.hml pour le template.```
+```[component-name].component.css pour la feuille de style.```
+
+##Règle 3
 Déclarez les propriétés avant les méthodes dans un composant, et les éléments privés après ceux qui sont publics, par ordre alphabétique.
 Il s'agit simplement d'une recommandation pour avoir une structure commune entre tous vos composants.
-Règle 4
+
+## Règle 4
 Limiter la logique d'un composant aux seules nécessités de la vue. Toutes les autres logiques métiers doivent être déléguées dans des services.
 La logique d'un composant pouvant être réutilisé par plusieurs composants doit être placée dans un service, afin d'éviter la redondance dans votre application. Vos composants doivent être uniquement concentrés sur la gestion de la vue, c'est leur rôle principal.
 Pour rappel, évitez d'avoir de la logique métier à l'intérieur de votre template : déplacez-là au niveau de la classe du composant !
-Les services
-Règle 1
+
+## Les services
+
+## Règle 1
 Utiliser les services comme des singletons, avec le même injecteur.
 Lorsque vos services sont des singletons, il est plus simple de les utiliser pour partager des données ou des méthodes à travers un module en particulier, ou dans toute l'application.
-Règle 2
+
+## Règle 2
 Fournissez les services à l'injecteur d'Angular au niveau du plus haut élément où ils seront partagés.
 Cette règle est principalement due au fait que l'injecteur d'Angular est hiérarchique. Lorsque que l'on fournit un service au composant le plus élevé, cette instance du service est partagée et rendue disponible pour tous les composants fils !
 
-Règle 3
+## Règle 3
 Séparer l'accès aux données dans un service.
 La logique de votre application qui concerne les opérations et l'interaction avec des données distantes ou locales doit se faire dans un service dédié, à savoir : les appels XHR, l'accès au local storage, aux données en mémoire et autres...
 Nous l'avons déjà vu : le rôle d'un composant est de recueillir et de présenter les données dans la vue. Il ne doit pas se préoccuper de la façon dont ces données sont obtenues, mais de la façon dont elles seront affichées dans la vue !
-Les outils à connaître
-Les outils à connaître
+
+## Les outils à connaître
 Les règles que nous venons de voir sembles intéressantes, et vous aimeriez sans doute les appliquer à votre code. 
 Mais comment faire ?
 Vous n'allez quand même pas relire tout le code de votre application, en vérifiant si chaque fichier respecte telle ou telle recommandation ! Ce serait très long, ennuyeux et inefficace.
@@ -711,37 +722,44 @@ Cet outil s'occupe pour vous de vérifier l'ensemble de votre code, et de vous i
 Il vous rédige une sorte de rapport sur l'état de votre application, et c'est ensuite à vous de décider si vous prenez en compte ses retours.
 Cette vidéo illustre très bien ce qu'il est possible de faire avec Codelyzer.
 
-Accélérez vos développements
+## Accélérez vos développements
 Lorsque vous développez, vous avez dû remarquer que vous effectuez souvent les mêmes tâches. Par exemple, quand vous créer un nouveau composant, il y a beaucoup de code commun à tous les composants. Vous devez importer l'annotation @Component, déclarer un sélecteur, exporter une classe vide au départ, etc.
-Il existe des outils qui vous évitent de devoir développer vous-même ce genre de code redondant. On parle de Snippets. Il en existe plusieurs en fonction de votre IDE:
+Il existe des outils qui vous évitent de devoir développer vous-même ce genre de code redondant. On parle de Snippets. Il en existe plusieurs en fonction de votre 
+
+IDE:
 1.	Visual Studio Code.
 2.	Atom.
 3.	Sublime Text.
 Les snippets définissent des raccourcis qui vous permettent de mettre en place en quelques clics l'architecture de certains éléments. Par exemple, pour mettre en place l'architecture de base d’un composant, on pourra utiliser le raccourci ng-component. La snippet s'occupera alors de générer un composant générique, qui respecte les conventions de nommage que nous avons vues !
-En résumé
+
+## En résumé
 1.	La documentation officielle d'Angular propose un guide qui répertorie toutes les bonnes pratiques de développement, avec une justification pour chaque recommandation.
 2.	Codelyzer est l'outil recommandé pour vérifier automatiquement si notre code respecte les recommandations de la documentation.
 3.	Il existe des snippets pour nous accélérer nos développements, en générant des bouts de code génériques qui respectent les recommandations d'Angular.
-Introduction
+
+## Introduction
 Lorsque nous avons développé l'application de ce cours, nous nous sommes contentés de copier-coller le fichier de configuration de TypeScript fournis par la documentation officielle. Mais que savons-nous exactement de ce fichier, et de son fonctionnement ? Pas grand chose, en fait.
 Le but de ce chapitre est de faire la lumière sur le fichier de configuration tsconfig.json, que l'on retrouve dans toutes les applications développées avec TypeScript !
 Le fichier de configuration de TypeScript
 Lorsque l'on utilise TypeScript dans un projet, il faut ajouter le fichier de configuration tsconfig.json dans le dossier du projet, pour guider le compilateur dans la génération du code JavaScript.
 Voici le fichier de base, tel qu'il est configuré pour faire fonctionner le projet que vous avez réalisé pendant ce cours:
-1.	01 {
-2.	02   "compilerOptions": {
-3.	03   "target": "es5",
-4.	04   "module": "commonjs",
-5.	05   "moduleResolution": "node",
-6.	06   "sourceMap": true,
-7.	07   "emitDecoratorMetadata": true,
-8.	08   "experimentalDecorators": true,
-9.	09   "removeComments": false,
-10.	10   "lib": [ "es2015", "dom" ],
-11.	11   "noImplicitAny": true,
-12.	12   "suppressImplicitAnyIndexErrors": true
-13.	13  }
-14.	14 }
+```
+{
+ "compilerOptions": {
+ "target": "es5",
+ "module": "commonjs",
+ "moduleResolution": "node",
+ "sourceMap": true,
+ "emitDecoratorMetadata": true,
+ "experimentalDecorators": true,
+ "removeComments": false,
+ "lib": [ "es2015", "dom" ],
+ "noImplicitAny": true,
+ "suppressImplicitAnyIndexErrors": true
+ }
+}
+```
+
 Ce fichier contient seulement les éléments et les options qui sont essentiels pour une application Angular.
 Nous allons d'abord voir les options existantes, et ensuite quels sont les éléments qui peuvent être ajoutés pour améliorer cette configuration initiale, dans les sessions suivantes.
 Vous trouverez plus d'information sur le fichier tsconfig.json sur la page dediée dans la documentation officielle de TypeScript.
@@ -758,8 +776,7 @@ Voici point par point les éléments de notre configuration actuelle:
 9.	noImplicitAny: Faut-il soulever des erreurs sur les variables dont le type any a été attribué implicitement par TypeScript. Choisir une valeur pour cette option peut être délicat, nous allons voir pourquoi dans la prochaine session.
 10.	suppressImplicitAnyIndexErrors: Sans rentrer dans les détails, permet d'ajouter un peu plus de souplesse à l'option noImplicitAny. On va traiter de ce point dans la prochaine session.
 
-
-L'option noImplicitAny
+## L'option noImplicitAny
 Il n'y a pas de vérité absolue à propos de la valeur à attribuer à l'élément noImplicitAny. Cependant, votre choix peut être impactant si vous travaillez sur des projets de tailles importantes.
 Quand l'option noImplicitAny est définie à false (qui est la valeur par défaut), si le compilateur ne peut pas déduire le type d'une variable en fonction de la façon dont elle est utilisée, le compilateur ajoutera implicitement le type any à cette variable.
 Lorsque TypeScript détermine tout seul le type d'un variable, on dit que le type est inféré par le compilateur.
@@ -777,7 +794,7 @@ Il existe certaines options que vous pouvez ajouter à la configuration de base 
 4.	locale (fr, par exemple): La locale à utiliser pour afficher des messages d'erreurs.
 Voici une liste exhaustive des configurations possibles pour tsconfig.json.
 
-Conclusion
+## Conclusion
 Nous avons pu voir plus en profondeur comment configurer TypeScript dans un projet.
 N'hésitez pas à vous référez à la documentation officielle si vous souhaitez en savoir plus. Cependant, avec ce que nous venons de voir, vous en savez bien assez pour commencer le développement de vos applications sereinement, plus d'excuses !
 En résumé
@@ -790,26 +807,29 @@ Les applications Angular (et Angular lui-même) dépendent de fonctionnalités f
 Node.js et NPM sont essentiels aux développements d'applications Angular: installez-les sur votre machine avant de pouvoir commencer à développer.
 Vérifiez que vous disposez de node 4.x.x ou plus, et npm 3.x.x ou plus, grâce aux commandes node -v et npm -v dans une fenêtre de terminal. Les versions plus anciennes causent des erreurs !
 Il est recommandé de démarrer son projet Angular avec un ensemble de paquets, spécifié dans le fichier package.json:
-1.	01 "dependencies": {
-2.	02   "@angular/animations": "^5.0.0",
-3.	03   "@angular/common": "^5.0.0",
-4.	04   "@angular/compiler": "^5.0.0",
-5.	05   "@angular/core": "^5.0.0",
-6.	06   "@angular/forms": "^5.0.0",
-7.	07   "@angular/http": "^5.0.0",
-8.	08   "@angular/platform-browser": "^5.0.0",
-9.	09   "@angular/platform-browser-dynamic": "^5.0.0",
-10.	10   "@angular/router": "^5.0.0",
-11.	11   "angular-in-memory-web-api": "^0.5.2",
-12.	12   "core-js": "^2.4.1",
-13.	13   "rxjs": "^5.5.2",
-14.	14   "systemjs": "0.19.40",
-15.	15   "zone.js": "^0.8.14"
-16.	16 }, ...
+```
+"dependencies": {
+  "@angular/animations": "^5.0.0",
+  "@angular/common": "^5.0.0",
+  "@angular/compiler": "^5.0.0",
+  "@angular/core": "^5.0.0",
+  "@angular/forms": "^5.0.0",
+  "@angular/http": "^5.0.0",
+  "@angular/platform-browser": "^5.0.0",
+  "@angular/platform-browser-dynamic": "^5.0.0",
+  "@angular/router": "^5.0.0",
+  "angular-in-memory-web-api": "^0.5.2",
+  "core-js": "^2.4.1",
+  "rxjs": "^5.5.2",
+  "systemjs": "0.19.40",
+  "zone.js": "^0.8.14"
+}, ...
+```
+
 Bien sûr, vous pouvez utiliser d'autres versions des paquets que celles indiqués ici, il s'agit juste des dernières versions disponibles au moment où j'écris ces lignes.
 Nous allons voir le rôle de chacun de ces paquets. Vous pourrez faire des substitutions plus tard, en fonction de vos goûts et de votre expérience.
 
-Les dépendances de l'application
+## Les dépendances de l'application
 Le fichier package.json inclut deux ensembles de paquets différents : dependencies et devDependencies.
 •	La section dependencies est essentielle pour l'exécution de l'application.
 •	Les devDependencies sont seulement nécessaires pour développer l'application.
@@ -837,6 +857,16 @@ Les paquets listés dans la section devDependencies nous aident seulement à dé
 1.	concurrently: Un utilitaire pour pouvoir exécuter des commandes NPM sur différents systèmes d'opérations comme OS/X, Windows et Linux ;
 2.	lite-server: Un serveur de fichiers statiques léger, avec un excellent support pour les applications Angular qui utilisent le Router ;
 3.	typescript: Tout ce qui est nécessaire pour pouvoir utiliser TypeScript, incluant le compilateur tsc.
+
+## Conclusion
+Nous avons pu décortiquer toutes les dépendances initiales d'un projet Angular. Même si ce n'est pas indispensable de connaître le fonctionnement de chaque dépendance, cela nous permet de savoir un peu mieux où l'on met les pieds, et on se sent toujours plus à l'aise quand on développe avec des outils que l'on connaît !
+En résumé
+1.	Il est nécessaire d'installer Node.js et NPM sur sa machine pour pouvoir développer des applications Angular.
+2.	Les librairies chargées par NPM sont appelées des paquets.
+3.	Il y a deux types de paquets à déclarer : les dépendances et les dépendances de développement.
+4.	Les dépendances sont les paquets nécessaires pour que l'application puisse fonctionner.
+5.	Les dépendances de développement sont des paquets permettant aux développeurs de développer l'application.
+
 
 
 
