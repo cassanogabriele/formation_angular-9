@@ -841,18 +841,20 @@ Vous trouverez plus d'information sur le fichier tsconfig.json sur la page dedi�
 
 # La configuration existante
 Voici point par point les éléments de notre configuration actuelle:
-1.	target: Cette option permet de spécifier la version d'ECMAScript souhaitée : es3, es5 ou es6. Il est recommandé d'utiliser la version es5 actuellement.
-2.	module: Permet de Spécifier le module de génération de code. Les valeurs possibles sont : 'none', 'commonjs', 'amd', 'system', 'umd', 'es6' ou 'es2015'. Choississez la manière dont vous souhaitez apporter la modularité dans votre application.
-3.	moduleResolution: S'occupe de la modularité de votre application. Mettez la valeur 'classic' si vous utilisez 'amd', 'es6' ou 'system', sinon laissez 'node'.
-4.	sourceMap: Souhaitez-vous générer des fichiers *.jsmap ou non ? Ces fichiers map servent débogueur de votre IDE pour faire le lien entre le code JavaScript exécuté et les fichiers sources originaux écrits en TypeScript, rendant ainsi le débogage de votre application plus facile.
-5.	emitDecoratorMetadata: Vous devez renseigner un booléen. Faut-il générer des méta-données pour les annotations présentes dans le code source (c'est-à-dire prendre en compte les annotations des fichiers sources ?) La réponse est oui, bien sûr !
-6.	experimentalDecorators: Activer le support expérimental pour les décorateurs ES7.
-7.	removeComments: Souhaitez-vous retirer les commentaires contenus dans les fichiers sources ? (excepté les en-têtes avec /*!, qui sont utilisés pour spécifier des copyright).
-8.	lib: Liste des fichiers de librairies à inclure dans la compilation.
-9.	noImplicitAny: Faut-il soulever des erreurs sur les variables dont le type any a été attribué implicitement par TypeScript. Choisir une valeur pour cette option peut être délicat, nous allons voir pourquoi dans la prochaine session.
-10.	suppressImplicitAnyIndexErrors: Sans rentrer dans les détails, permet d'ajouter un peu plus de souplesse à l'option noImplicitAny. On va traiter de ce point dans la prochaine session.
+
+1. target: Cette option permet de spécifier la version d'ECMAScript souhaitée : es3, es5 ou es6. Il est recommandé d'utiliser la version es5 actuellement.
+2. module: Permet de Spécifier le module de génération de code. Les valeurs possibles sont : 'none', 'commonjs', 'amd', 'system', 'umd', 'es6' ou 'es2015'. Choississez la manière dont vous souhaitez apporter la modularité dans votre application.
+3. moduleResolution: S'occupe de la modularité de votre application. Mettez la valeur 'classic' si vous utilisez 'amd', 'es6' ou 'system', sinon laissez 'node'.
+4. sourceMap: Souhaitez-vous générer des fichiers *.jsmap ou non ? Ces fichiers map servent débogueur de votre IDE pour faire le lien entre le code JavaScript exécuté et les fichiers sources originaux écrits en TypeScript, rendant ainsi le débogage de votre application plus facile.
+5. emitDecoratorMetadata: Vous devez renseigner un booléen. Faut-il générer des méta-données pour les annotations présentes dans le code source (c'est-à-dire prendre en compte les annotations des fichiers sources ?) La réponse est oui, bien sûr !
+6. experimentalDecorators: Activer le support expérimental pour les décorateurs ES7.
+7. removeComments: Souhaitez-vous retirer les commentaires contenus dans les fichiers sources ? (excepté les en-têtes avec /*!, qui sont utilisés pour spécifier des copyright).
+8. lib: Liste des fichiers de librairies à inclure dans la compilation.
+9. noImplicitAny: Faut-il soulever des erreurs sur les variables dont le type any a été attribué implicitement par TypeScript. Choisir une valeur pour cette option peut être délicat, nous allons voir pourquoi dans la prochaine session.
+10. suppressImplicitAnyIndexErrors: Sans rentrer dans les détails, permet d'ajouter un peu plus de souplesse à l'option noImplicitAny. On va traiter de ce point dans la prochaine session.
 
 ## L'option noImplicitAny
+
 Il n'y a pas de vérité absolue à propos de la valeur à attribuer à l'élément noImplicitAny. Cependant, votre choix peut être impactant si vous travaillez sur des projets de tailles importantes.
 Quand l'option noImplicitAny est définie à false (qui est la valeur par défaut), si le compilateur ne peut pas déduire le type d'une variable en fonction de la façon dont elle est utilisée, le compilateur ajoutera implicitement le type any à cette variable.
 Lorsque TypeScript détermine tout seul le type d'un variable, on dit que le type est inféré par le compilateur.
@@ -860,28 +862,40 @@ Jusqu'à maintenant, on a laissé cette valeur à false pour faciliter l'apprent
 Cependant, quand cette valeur est définie à true, et que le compilateur ne peut pas inférer le type d'une variable, il va générer les fichiers JavaScript, mais il lèvera également une erreur !
 Beaucoup de développeurs chevronnés préfèrent ce paramètre, plus strict, parce que cette vérification de type permet de lever plus d'erreurs involontaires lors de la compilation.
 Si vous définissez l'option notImpicitAny à true, vous pourriez obtenir des erreurs implicites du compilateur. Ces erreurs particulières sont plus ennuyeuses qu'utiles. On peut supprimer ces erreurs en ajoutant l'option suivante:
-1.	01 'suppressImplicitAnyIndexErrors': true
+
+``` suppressImplicitAnyIndexErrors': true ```
+
 On peut définir le type d'une variable à any même quand l'option noImplicitAny est définie à true !
-Les configurations supplémentaires
+
+## Les configurations supplémentaires
+
 Il existe certaines options que vous pouvez ajouter à la configuration de base du compilateur:
-1.	outDir (chaîne de caractère): Cette option permet de définir un nom de dossier dans lequel seront ajoutés les fichiers JavaScript générés par le compilateur. Nous avons utilisé cette option au début de ce cours, dans le chapitre "Hello, World !" avec Angular. On utilise généralement le nom de dossier "dist", qui signifie distribution.
-2.	pretty (booléen): Si définit à true, cette option permet d'ajouter des couleurs aux messages d'erreurs du compilateur dans la console. Cela ne coûte pas cher et c'est bien pratique !
-3.	charset (UTF-8): Permet d'encoder en UTF-8 les fichiers générés par le compilateur.
-4.	locale (fr, par exemple): La locale à utiliser pour afficher des messages d'erreurs.
+
+1. outDir (chaîne de caractère): Cette option permet de définir un nom de dossier dans lequel seront ajoutés les fichiers JavaScript générés par le compilateur. Nous avons utilisé cette option au début de ce cours, dans le chapitre "Hello, World !" avec Angular. On utilise généralement le nom de dossier "dist", qui signifie distribution.
+2. pretty (booléen): Si définit à true, cette option permet d'ajouter des couleurs aux messages d'erreurs du compilateur dans la console. Cela ne coûte pas cher et c'est bien pratique !
+3. charset (UTF-8): Permet d'encoder en UTF-8 les fichiers générés par le compilateur.
+4. locale (fr, par exemple): La locale à utiliser pour afficher des messages d'erreurs.
+
 Voici une liste exhaustive des configurations possibles pour tsconfig.json.
 
 ## Conclusion
+
 Nous avons pu voir plus en profondeur comment configurer TypeScript dans un projet.
 N'hésitez pas à vous référez à la documentation officielle si vous souhaitez en savoir plus. Cependant, avec ce que nous venons de voir, vous en savez bien assez pour commencer le développement de vos applications sereinement, plus d'excuses !
-En résumé
-1.	La configuration de TypeScript dans un projet repose sur le fichier tsconfig.json.
-Introduction
+
+## En résumé
+
+1. La configuration de TypeScript dans un projet repose sur le fichier tsconfig.json.
+
+## Introduction
+
 Ce chapitre a pour objectif de détailler les dépendances nécessaires au démarrage d'un projet Angular. Nous allons voir précisément quelles sont ces dépendances, et pourquoi elles sont indispensables.
 Bien sûr, vous n'avez pas besoin de connaître parfaitement les dépendances d'un projet avant de commencer à développer. Cependant, c'est toujours un plus si vous maîtrisez un peu mieux votre environnement de développement.
 Les dépendances d'un projet Angular
 Les applications Angular (et Angular lui-même) dépendent de fonctionnalités fournies par des librairies. Ces librairies sont maintenues et installées avec le Node Package Manager: on parle de paquets.
 Node.js et NPM sont essentiels aux développements d'applications Angular: installez-les sur votre machine avant de pouvoir commencer à développer.
 Vérifiez que vous disposez de node 4.x.x ou plus, et npm 3.x.x ou plus, grâce aux commandes node -v et npm -v dans une fenêtre de terminal. Les versions plus anciennes causent des erreurs !
+
 Il est recommandé de démarrer son projet Angular avec un ensemble de paquets, spécifié dans le fichier package.json:
 ```
 "dependencies": {
@@ -901,47 +915,58 @@ Il est recommandé de démarrer son projet Angular avec un ensemble de paquets, 
   "zone.js": "^0.8.14"
 }, ...
 ```
-
-Bien sûr, vous pouvez utiliser d'autres versions des paquets que celles indiqués ici, il s'agit juste des dernières versions disponibles au moment où j'écris ces lignes.
-Nous allons voir le rôle de chacun de ces paquets. Vous pourrez faire des substitutions plus tard, en fonction de vos goûts et de votre expérience.
+Bien sûr, vous pouvez utiliser d'autres versions des paquets que celles indiqués ici, il s'agit juste des dernières versions disponibles au moment où j'écris ces lignes. Nous allons voir le rôle de chacun de ces paquets. Vous pourrez faire des substitutions plus tard, en fonction de vos goûts et de votre expérience.
 
 ## Les dépendances de l'application
+
 Le fichier package.json inclut deux ensembles de paquets différents : dependencies et devDependencies.
-•	La section dependencies est essentielle pour l'exécution de l'application.
-•	Les devDependencies sont seulement nécessaires pour développer l'application.
+
+• La section dependencies est essentielle pour l'exécution de l'application.
+• Les devDependencies sont seulement nécessaires pour développer l'application.
 On peut exclure les paquets devDependencies de l'installation grâce à la commande suivante : npm install --production.
 Les paquets de fonctionnalités
 La section dependencies du package.json contient plusieurs types de paquets : les paquets de fonctionnalités, des polyfills et des utilitaires en plus.
-1.	@angular/core: C'est la pièce maitresse du framework, nécessaire pour toutes les applications. Inclut toutes les annotations @Component, @Directive, l'injection de dépendances et les cycles de vie des composants.
-2.	@angular/common: Ce paquet contient les services couramment nécessaires, les pipes et les directives fournis par l'équipe de développement d'Angular.
-3.	@angular/compiler: Le compilateur de template d'Angular interprète les templates et les convertit en code pour rendre l'application fonctionnelle. En générale, on n'interagit pas directement avec le compilateur. A la place, on utilise le paquet platform-browser-dynamic ou platform-browser.
-4.	@angular/platform-browser: Ce paquet inclut la méthode bootstrapStatic pour démarrer l'application à destination de la production, pré-compilant tous les templates à l'avance, avant de les envoyer dans le navigateur.
-5.	@angular/plateform-browser-dynamic: Inclut la méthode bootstrap pour les applications qui compilent les templates côté client. Utiliser ce paquet pour démarrer l'application plutôt durant le développement.
-6.	@angular/common/http: Le client HttpClient d'Angular.
-7.	@angular/router: Le routeur, et d'autres utilitaires pour faire fonctionner la navigation dans votre application.
-8.	System.js: Un chargeur dynamique de modules compatible avec la spécification des modules ES2015.
+
+1. @angular/core: C'est la pièce maitresse du framework, nécessaire pour toutes les applications. Inclut toutes les annotations @Component, @Directive, l'injection de dépendances et les cycles de vie des composants.
+2. @angular/common: Ce paquet contient les services couramment nécessaires, les pipes et les directives fournis par l'équipe de développement d'Angular.
+3. @angular/compiler: Le compilateur de template d'Angular interprète les templates et les convertit en code pour rendre l'application fonctionnelle. En générale, on n'interagit pas directement avec le compilateur. A la place, on utilise le paquet platform-browser-dynamic ou platform-browser.
+4. @angular/platform-browser: Ce paquet inclut la méthode bootstrapStatic pour démarrer l'application à destination de la production, pré-compilant tous les templates à l'avance, avant de les envoyer dans le navigateur.
+5. @angular/plateform-browser-dynamic: Inclut la méthode bootstrap pour les applications qui compilent les templates côté client. Utiliser ce paquet pour démarrer l'application plutôt durant le développement.
+6. @angular/common/http: Le client HttpClient d'Angular.
+7. @angular/router: Le routeur, et d'autres utilitaires pour faire fonctionner la navigation dans votre application.
+8. System.js: Un chargeur dynamique de modules compatible avec la spécification des modules ES2015.
+
 Vos applications futures sont susceptibles d'avoir besoin de paquets supplémentaires, pour fournir des directives, des thèmes, faciliter l'accès aux données et autres utilitaires. Il faudra alors ajouter ces dépendances dans le fichier package.json.
-Les paquets de supports & Polyfill
+
+## Les paquets de supports & Polyfill
+
 Angular requiert certains paquets de supports et polyfills pour faire fonctionner une application. Vous devez lister ces éléments parmi les paquets de la section dependencies. Il y a trois paquets recommandés au démarrage d'un projet:
-1.	CoreJs: Un polyfill qui corrige le contexte global (window) avec les fonctionnalités essentielles d'ES6. Quand ES6 sera implémentée par les principaux navigateurs, cette dépendance deviendra inutile.
-2.	RxJs: Un paquet de support concernant la spécification des Observables. Voici pouvez choisir la version de RxJs que vous préférez (dans une plage de version compatible), sans avoir besoin d'attendre les mises à jour d'Angular.
-3.	ZoneJs: Un paquet de support pour la spécification des zones, qui fournissent un contexte d'exécution pour les opérations asynchrones. Comme pour RxJs, vous pouvez choisir la version de zone que vous préférez (dans une plage de version compatible également, bien sûr !).
-Les autres librairies
-1.	angular-in-memory-web-api: Une librairie qui simule un serveur web distant sans avoir besoin d'en installer un. C'est très pratique pour les démonstrations, les exemples, et les développements à un stade précoce.
-Les dépendances de développement
+
+1. CoreJs: Un polyfill qui corrige le contexte global (window) avec les fonctionnalités essentielles d'ES6. Quand ES6 sera implémentée par les principaux navigateurs, cette dépendance deviendra inutile.
+2. RxJs: Un paquet de support concernant la spécification des Observables. Voici pouvez choisir la version de RxJs que vous préférez (dans une plage de version compatible), sans avoir besoin d'attendre les mises à jour d'Angular.
+3. ZoneJs: Un paquet de support pour la spécification des zones, qui fournissent un contexte d'exécution pour les opérations asynchrones. Comme pour RxJs, vous pouvez choisir la version de zone que vous préférez (dans une plage de version compatible également, bien sûr !).
+
+## Les autres librairies
+
+1. angular-in-memory-web-api: Une librairie qui simule un serveur web distant sans avoir besoin d'en installer un. C'est très pratique pour les démonstrations, les exemples, et les développements à un stade précoce.
+
+## Les dépendances de développement
 Les paquets listés dans la section devDependencies nous aident seulement à développer l'application. Nous n'avons pas besoin de les déployer en production. Voici les paquets les plus importantes en rapport avec ce cours:
-1.	concurrently: Un utilitaire pour pouvoir exécuter des commandes NPM sur différents systèmes d'opérations comme OS/X, Windows et Linux ;
-2.	lite-server: Un serveur de fichiers statiques léger, avec un excellent support pour les applications Angular qui utilisent le Router ;
-3.	typescript: Tout ce qui est nécessaire pour pouvoir utiliser TypeScript, incluant le compilateur tsc.
+
+1. concurrently: Un utilitaire pour pouvoir exécuter des commandes NPM sur différents systèmes d'opérations comme OS/X, Windows et Linux ;
+2. lite-server: Un serveur de fichiers statiques léger, avec un excellent support pour les applications Angular qui utilisent le Router ;
+3. typescript: Tout ce qui est nécessaire pour pouvoir utiliser TypeScript, incluant le compilateur tsc.
 
 ## Conclusion
 Nous avons pu décortiquer toutes les dépendances initiales d'un projet Angular. Même si ce n'est pas indispensable de connaître le fonctionnement de chaque dépendance, cela nous permet de savoir un peu mieux où l'on met les pieds, et on se sent toujours plus à l'aise quand on développe avec des outils que l'on connaît !
-En résumé
-1.	Il est nécessaire d'installer Node.js et NPM sur sa machine pour pouvoir développer des applications Angular.
-2.	Les librairies chargées par NPM sont appelées des paquets.
-3.	Il y a deux types de paquets à déclarer : les dépendances et les dépendances de développement.
-4.	Les dépendances sont les paquets nécessaires pour que l'application puisse fonctionner.
-5.	Les dépendances de développement sont des paquets permettant aux développeurs de développer l'application.
+
+## En résumé
+
+1. Il est nécessaire d'installer Node.js et NPM sur sa machine pour pouvoir développer des applications Angular.
+2. Les librairies chargées par NPM sont appelées des paquets.
+3. Il y a deux types de paquets à déclarer : les dépendances et les dépendances de développement.
+4. Les dépendances sont les paquets nécessaires pour que l'application puisse fonctionner.
+5. Les dépendances de développement sont des paquets permettant aux développeurs de développer l'application.
 
 
 
