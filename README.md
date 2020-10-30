@@ -42,7 +42,7 @@ php artisan make:seed ArticleSeeder
 ## Appeler le database seeder
 php artisan db:seed
 
-#####################################################################
+##################################################################################################################################################################
 
 ## Exécuter directement du code PHP (shell -> exit pour quitter)
 php artisan tinker
