@@ -968,9 +968,92 @@ Nous avons pu décortiquer toutes les dépendances initiales d'un projet Angular
 4. Les dépendances sont les paquets nécessaires pour que l'application puisse fonctionner.
 5. Les dépendances de développement sont des paquets permettant aux développeurs de développer l'application.
 
+## Ecmascript 6 (ES6)
 
+JavaScript est un langage à part : un système d'héritage prototypal, des fonctions anonymes, etc. Le besoin d'une nouvelle standardisation s'est fais sentir pour fournir à JavaScript le moyen de développer des applications web robustes. EcmaScript est le nom de la dernière version standardisée de JavaScript qui a été approuvé par l'organiseme de normalisation, ce standard sera donc supporté de plus en plus par le navigateur dans les temps à venir, il deviendra bientôt inévitable. Toutes les versions de EcmaScript ne prendront pas autant de temps à sortir que EcmaScript 6. Sans le savoir, on développait déjà en ES5 car c'est le standard le plus courant utilisé depuis quelques années (ECMAScript 2015, EMAScript 6  et ES6 signifient la même chose, ES6 est son surnom le plus populaire). Même si toutes les nouveautés de ES6 ne fonctionnent pas dans certains navigateurs, beaucoup de développeurs ont commencé à développé déjà avec ES6 et utilisent un transpilateur pour convertir du code ES6 en ES5, ainsi leur code est compréhensible par tous les navigateurs. Un transpilateur est un outil qui permet de publier son code pour les navigateurs qui ne supportent pas encore le ES6, comme certaines fonctionnalités ES6 ne sont pas disponibles dans ES5, leur comportement est simulé. ES6 est une spécification standardisée ne concerne pas seulement le JavaScript mais également le langage Swift d'appel, JavaScript est une des implémentations de la spécification standardisée d'ES6.
 
+## Les classes 
 
+```
+function Vehicle(color, drivingWheel) {
+    this.color = color;
+    this.drivingWheel = drivingWheel;
+    this.isEngineStart = false;
+}
+
+Vehicle.prototype.start = function start(){
+    this.isEngineStart = true;
+}
+
+Vehicle.prototype.stop = function stop(){
+    this.isEngineStart = false;
+}
+```
+
+Une des fonctionnalités intéressantes d'ES6 est qu'il est désormais possible d'utiliser des classes en JavaScript, c'est le moyen détourné utilisé pour créer un objet en utilisant la mécanisme des protoypes propre à JavaScript (héritage prototypal et les prototypes : https://www.youtube.com/watch?v=-22uczx3Tb4). Es6 introduit une nouvelle syntaxe : le mot clé "class",  c'est le même mot clé que dans d'autres langages comme le Java mais c'est toujours de l'héritage par prototype qui tourne derrière, en tant que développeur on a plus à s'en soucier. C'est une classe JavaScript bien différent qu'en ES5, on peut même utiliser le mot clé "constructor" pour initialiser une valeur aux attributs de l'objet.
+
+## L'héritage 
+
+## En ES5
+
+```
+// On ajoute une classe "car"
+function Car(color, drivingWheel, seatings) {
+  // On utilise la méthode "call" pour appeler le constructeur parent
+  Vehicle.call(this, color, drivingWheel);
+  // On ajoute un attribut supplémentaire pour la classe fille (le nombre de sièges passagers)
+  this.seatings = seatings;
+}
+
+// On déclarer un prototype pour le nouvel objet "car" avec la méthode "create" de l'objet "Object"
+Car.prototype = Object.create(Vehicle.prototype);
+
+// Une moto est un véhicule également.
+function Motorbike(color, drivingWheel, unleash) {
+  // On ajout comme attribut supplémentaire que la moto est débridée ou nons
+  Vehicule.call(this, color, drivingWheel);
+  this.unleash = unleash;
+}
+
+Motorbike.prototype = Object.create(Vehicle.prototype);
+```
+
+## En ES6
+
+```
+class Vehicle  {
+  constructor(color, drivingWheel, isEngineStart = false) {
+    this.color = color;
+    this.drivingWheel = drivingWheel;
+    this.isEngineStart = isEngineStart; 
+  }
+  
+  start() {
+    this.isEngineStart = true;
+  }
+  
+  stop() {
+    this.isEngineStart = false;
+  }
+}
+
+// On dit que la classe "Car" hérite de "Vehicle"
+class Car extends Vehicle {
+  constructor(color, drivingWheel, isEngineStart = false, seatings) {
+    // On appelle le constructeur parent avec "super"
+    super(color, drivingWheel, isEngineStart);
+    this.seatings = seatings;
+  } 
+}
+
+class Motorbike extends Vehicle {
+  constructor(color, drivingWheel, isEngineStart = false, unleash) {
+    super(color, drivingWheel, isEngineStart);
+    this.unleash = unleash;
+  } 
+}
+```
+Pour ajouter les classes en JavaScript, on continue avec l'héritage, on a plus besoin de l'héritage prototypal de JavaScript. Avec ES5, il fallait appeler la méthode "call" pour hériter du constructeur. Le code est très lourd est verbeux, c'est pour ça qu'avec ES6, on peut utiliser le mot clé "extends" et le mot clé "super" en JavaScript pour attacher les classes filles "Car" et "Motorbike" à la classe parente "Vehicle". 
 
 
 
