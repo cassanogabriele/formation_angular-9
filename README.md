@@ -1055,6 +1055,90 @@ class Motorbike extends Vehicle {
 ```
 Pour ajouter les classes en JavaScript, on continue avec l'héritage, on a plus besoin de l'héritage prototypal de JavaScript. Avec ES5, il fallait appeler la méthode "call" pour hériter du constructeur. Le code est très lourd est verbeux, c'est pour ça qu'avec ES6, on peut utiliser le mot clé "extends" et le mot clé "super" en JavaScript pour attacher les classes filles "Car" et "Motorbike" à la classe parente "Vehicle". 
 
+## Les paramètres par défaut 
+En JavaScript, on ne peut pas restreindre le nombre d'arguments attendus par une fonction, ni définir des paramètres par défaut. 
+
+## Implémentation traditionnelle de la fonction "sum"
+Elle prend un nombre quelconque d'arguments en paramètres, on ne peut pas le définir à l'avance puisqu'on ne peut peut définir un nombre de paramètres bien  définis en JavaScript. On va additionner tous les paramètres passés à la fonction "sum" et on va ensuite retourner le résultat, il n'y pas d'argument dans la signature de la fonction mais le mot-clé "arguments" est un mot-clé en JavaScript qui permet de récupérer sous forme de tableau, tous les paramètres passés à la fonction et ainsi, on peut les traiter dans le code de la fonction, ce n'est pas très pratique si on veut définir un nombre déterminé de paramètres. 
+
+```
+function sum(){
+    var result = 0;
+    for (var i = 0; i < arguments.length; i++) {
+        result += arguments[i];
+    }
+    return result;
+}
+```
+
+## En ES5
+On peut définir des valeurs par défaut en ES5, on bricolait pour faire comme si les variables par défaut étaient supportées. Si on imagine que la fonction multiplie deux nombres passés en paramètre et le deuxième paramètre est facultatif, et on voudrait définir la valeur "1" par défaut, on utilise un opérateur ternaire pour attribuer la valeur "1" à la variable b si aucun nombre n'a été attribué en paramètre, sinon on attribue la valeur que l'utilisateur à passé en paramètre. Le code est très compliqué pour réaliser quelque chose qui est très simple. 
+
+```
+function multiply(a, b) {
+  var b = typeof b !== 'undefined' ? b : 1; // b est facultatif
+
+  return a*b;
+}
+
+multiply(2, 5); // 10
+multiply(1, 5); // 5
+multiply(5); // 5
+```
+
+## En ES6
+ES6 permet d'utiliser une syntaxe plus élégante, il suffit de définir une valeur par défaut dans la signature même de la fonction, c'est plus pratique.
+
+```
+function multiply(a, b = 1) {
+  return a*b;
+}
+
+multiply(5); // 5
+```
+
+## Le mot-clé let 
+Il permet de déclarer une variable locale dans le contexte (scope) ou elle a été assignée. Les instructions qu'on écrit dans le corps d'une fonction ou à l'extérieur, n'ont pas le même contexte. Normalement, une instruction "if" n'a pas de contexte en soi mais si on utilise le mot-clé "let", il va définir un contexte propre à l'instruction "if", cela peut être utile pour effectuer beaucoup d'opérations sur une variable sans polluer d'autres contextes avec des variables qui ne sont pas nécessaires. 
+
+```
+var x = 1;
+
+if(x < 10) {
+  // On déclare une variable "v" avec le mot-clé "let" à l'intérieur de l'instruction "if" 
+  let v = 1;
+  v = v + 21;
+  v = v * 100;
+  v = v / 8;
+	// Il va afficher la valeur de "v"
+  console.log(v);
+}
+
+// v n'est pas définie, car v a été déclarée avec 'let' et non 'var'.
+console.log(v); 
+```
+
+si on fait un console.log(x) qu'on a déclaré avec "var" au-dessus, cela s'affichera.
+
+## Exemple avec une boucle (cela fonctionne de la même manière que pour "if")
+```
+// On déclare une nouvelle variable "i" comme dans toutes les boucles avec JavaScript mais on le fait avec "let"
+for (let i = 0; i < 10; i++) {
+  console.log(i); // 0, 1, 2, 3, 4 ... 9
+}
+
+// La variable "i" n'est pas définie hors du contexte de la boucle
+console.log(i); 
+```
+La déclaration de la nouvelle variable "i" va être accessible à l'intérieur de la boucle "for" mais cela ne va pas venir polluer l'extérieur du contexte de la boucle "for". En règle générale, garder un contexte global propre est vivement conseillé et c'est pourquoi le mot-clé "let" est vraiment le bienvenu, cela permet de mettre en place de bonnes pratiques sans avoir à réfléchir. Le mot-clé "let" a été pensé pour remplacer le mot-clé "var".
+
+
+
+
+
+
+
+
+
 
 
 
