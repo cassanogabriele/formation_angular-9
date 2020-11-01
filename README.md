@@ -1131,6 +1131,105 @@ console.log(i);
 ```
 La déclaration de la nouvelle variable "i" va être accessible à l'intérieur de la boucle "for" mais cela ne va pas venir polluer l'extérieur du contexte de la boucle "for". En règle générale, garder un contexte global propre est vivement conseillé et c'est pourquoi le mot-clé "let" est vraiment le bienvenu, cela permet de mettre en place de bonnes pratiques sans avoir à réfléchir. Le mot-clé "let" a été pensé pour remplacer le mot-clé "var".
 
+## Le mot clé "const"
+Il permet de déclarer des constantes. La déclaration d'une constante ne peut se faire qu'une seule fois et une fois définie, on ne peut plus changer la valeur. Pour un tableau ou un objet, on ne peut pas modifier la référence vers le tableau ou l'objet mais on peut continuer à modifier les valeurs dans le tableau ou les propriétés de l'objet.
+
+```
+// Déclaration d'une constante et on lui attribue une valeur
+const PI = 3.141592;
+
+// Tentive de modification d'une constante.
+// Si on choisit d'attribuer un arrondit à la valeur PI, cela va lever une erreur
+PI = 3.146; // Erreur : la valeur de PI ne peut plus être modifié.
+
+// On définit une nouvelle constante et on lui attribue un objet qui a 2 propriété (une pour le nombre PI et l'autre pour le nombre exponentiel)
+// Modification d'une constante de type tableau. Si on modifie la propriété PI de l'objet, cela ne lèvera pas d'erreur.
+const MATHEMATICAL_CONSTANTS = {PI: 3.141592, e: 2,718281};
+MATHEMATICAL_CONSTANTS.PI = 3.146; // Aucun problème.
+```
+## Les mots clés réservés en JavaScript : if, else, new, var, for, etc.
+En JavaScript, comme dans beaucoup d'autres langages, il existe des mots clés qui sont réservés, ce sont des mots clés qu'on ne doit pas utiliser comme nom de variable, nom de fonction, de constante ou de méthode car JavaScript à une utilité spéciale pour eux. 
+
+## Liste de tous les mots clés réservés en JavaScript avec les nouveaux mots clés ES6
+https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Mots_r%C3%A9serv%C3%A9s
+
+## Les promesses 
+Elles étaient déjà présentes dans Angular JS, leur objectif est de simplifier la programmation asynchrone. En général, on utilise des fonctions de callback, des fonctions anonymes qui sont appelées un certain moment dans l'application mais elles les promesses sont plus pratiques que les callback.
+
+## Exemple de code avec des callback
+Pour afficher une liste d'amis d'un utilisateur donné, on appelle la fonction "getUser" en lui passant l'identifiant de l'utilisateur et une fonction de callback qui va récupérer l'utilisateur avec un certain délai car c'est asynchrone et ensuite, on appelle la méthode "getFriendsList" en lui passant l'utilisateur qu'on a récupéré et cette méthode, après un certain délai, va renvoyer "friends" qui contient une liste d'amis. Ce code est plutôt verbeux et il n'est pas très agréable à lire. 
+
+## Les promesses en ES5
+```
+// Utilisation de base
+getUser(userId, function(user) {
+  getFriendsList(user, function(friends) {
+    showFriends(friends);
+  });
+});
+
+// Utilisation avec des Promesses
+getUser(userId)
+.then(function(user) {
+  getFriendsList(user);
+})
+.then(function(friends) {
+  // On appelle la méthode "showFriends" en lui passant en paramètres les amis qu'on a récupéré et cette méthode affiche la liste des amis. 
+  showFriends(friends);
+});
+```
+## Les promesses en ES6
+Les promesses proposent un code plus efficace et plus élégant, ce code fera la même chose que précédemment, il parle de lui-même.
+
+## La méthode "then"
+Quand on crée une promesse avec la classe "promise", il lui associe une méthode "then" qui va prendre 2 arguments : une fonction en cas de succès et une fonction en cas d'erreur, ainsi lorsque la promesse est réalisée, c'est la fonction de succès qui est appelée et en cas d'erreur, c'est la fonction d'erreur qui est invoquée.
+
+Promesse qui récupère un utilisateur depuis un serveur distant à partir de son identifiant. On déclare une Promesse "getUser", qui est une fonction qui va retourner l'objet "Promise" et on va lui passer 2 paramètres : "resolve", qui est la fonction de succès et "reject", qui est la fonction qui est appelée en cas d'erreur. Il y a un appel asynchrone au serveur pour récupérer les informations d'un utilisateur quelconque et on attend la réponse du serveur et une fois qu'on l'a, on va extraire la donnée qui vient du serveur "response.data.user" et on va l'attribuer à la variable "user". Ensuite, si le status de la réponse est 200, donc que le code http de la requête est valide, on va appeler la méthode de succès "resolve" en lui passant en paramètre le "user" que le serveur à retourné, sinon, en cas d'erreur, on retourne le message d'erreur.  
+
+```
+// Déclarer une Promesse
+let getUser = function(userId) {
+  return new Promise(function(resolve, reject) {
+  // appel asynchrone au serveur pour récupérer les informations d'un utilisateur...
+  // à partir de la réponse du serveur, j'extrais les données de l'utilisateur :
+  let user = response.data.user;
+
+  if(response.status === 200) {
+    // On appelle la fonction de succès et la fonction d'erreur dans le "else" 
+    resolve(user);
+  } else {
+    reject('Cet utilisateur n\'existe pas.');
+  }
+})
+}
+```
+On vient de créer une "Promesse" et ensuite, on peut l'utiliser avec la méthode "then" dans l'application.
+
+```
+// Traiter une Promesse
+getUser(userId)
+  // On gère le cas ou on récupère bien l'utilisateur 
+  .then(function (user) {
+    console.log(user); // en cas de succés
+  }, function (error) { // On passe une fonction qui est censé gérer le cas d'erreur.
+    console.log(error); // en cas d'erreur
+});
+```
+
+## Les fonctions fléchées
+Elles permettent de simplifier l'écriture des fonctions anonymes, on en utilise partout avec les Promesses et donc les Promesses et les fonctions fléchées vont se combiner parfaitement afin d'obtenir la syntaxe la plus élégante possible pour gérer les cas de programmation asynchrone. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
