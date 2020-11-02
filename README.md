@@ -1219,6 +1219,68 @@ getUser(userId)
 ## Les fonctions fléchées
 Elles permettent de simplifier l'écriture des fonctions anonymes, on en utilise partout avec les Promesses et donc les Promesses et les fonctions fléchées vont se combiner parfaitement afin d'obtenir la syntaxe la plus élégante possible pour gérer les cas de programmation asynchrone. 
 
+## Les collections Set et Map 
+La collection Map est l'équivalent d'un dictionnaire dans le langage dans lequel on va ajouter des paires de clés/valeurs.
+
+## Exemple  : cas ou on vont stocker le classement de plusieurs joueurs
+
+## Les dictionnaires et les listes (ES6)
+
+##  Les Dictionnaires avec Map
+
+## Dictionnaire contenant un joueur et son classement  
+```
+// Création d'un nouveau joueur ayant comme rang 1
+let zlatan = {rank: 1, name: 'Zlatan'};
+
+// Création d'une nouvelle collection Map
+let players = new Map(); 
+// Utilisation de la méthode set de la collection pour définir comme clé le rang du joueur et comme valeur, son nom.
+// On ajoute donc l'objet "zlatan" à la clé "1"
+players.set(zlatan.rank, zlatan.name); 
+```
+
+##  Les listes avec Set
+Une liste se comporte comme un dictionnaire mais sans clé, on peut le voir comme une sorte de tableau amélioré. 
+
+```
+// On déclare une nouvelle liste de joueurs
+let players = new Set(); 
+// On ajoute l'objet précédent avec la méthode "add" et pas la méthode "set"
+// On ajoute un joueur dans cette liste
+players.add(zlatan); 
+```
+
+##  Méthodes pour Map et Set
+On peut ensuite faire tout un tas d'opérations sur les collections, qu'il s'agisse de dictionnaires ou de listes.
+
+```
+// On applique la méthode "size" pour obtenir en retour la taille de la collection : le nombre d'éléments dans le dictionnaire ou la liste.
+players.size; 
+
+// Dans le cas d'un dictionnaire, on va déterminer si le dictionnaire contient ou non, la clé du range de "slatan".
+// On passe bien la clé et non l'objet "slatan" à la méthode "has"
+players.has(zlatan.rang); 
+// Dans le cas d'une liste, on passe directement l'objet qu'on a ajouté dans le tableau avec la méthode "add" précédemment.
+players.has(zlatan); 
+
+// On va chercher un joueur du dictionnaire, en passant également la clé et non pas l'objet, à la méthode "delete".
+players.delete(zlatan.rang);
+// Dans le cas d'une liste : on passe directement l'objet qu'on a ajouté à la liste
+players.delete(zlatan); 
+```
+
+## Les templates strings 
+C'est la dernière nouveauté de JavaScript, ES6, c'est donc une petite amélioration d'ES6, très pratique. Jusqu'à maintenant, on concatène les caractères, on est obligé de concaténer sur plusieurs ligne avec l'opération "+=" pour construire une chaîne de caractères un peu longue, c'est assez pénible à écrire et à lire, cela augmente les erreurs d'inatention qu'on pourrait faire. ES6 permet d'utiliser des templates strings qui commence et se termine non pas par une "quote" mais par un "backtick". ES6 permet aussi avec la syntaxe "${}" de concaténer des variables dans les chaînes de caractères de manière beaucoup plus élégantes, qu'en le faisant avec l'opérateur +. Grâce aux templates strings et à ES6, on à accès aux opérateurs "backquote" et "${}" qui permettent d'écrire enfin des chaînes de caractères longues en JavaScript sans devoir utiliser une succession de "+=" interminable et pénible à écrire.
+
+## Conclusion 
+On va plusieurs changements majeurs apportés par ES6 à JavaScript et qui vont tous nous servir dans le cadre du développement d'une application Angular. ES6 est rétro-compatible : on peut toujours développer de la façon dont on le fait actuellement puis s'habituer et migrer petit à petit vers la syntaxe ES6. Il est fortement conseillé d'adopter assez rapidement ES6 et d'essayer de s'y habituer, on y gagnera en productivité et en lisibilité dans le code. 
+
+## En résumé
+JavaScript profite de la nouvelle spécification standardisée ECMAScript 6, également nommée ES6.
+On peut développer en ES6 dès aujourd'hui, et utiliser un transpilateur pour convertir notre code d’ES6 vers ES5, afin qu'il soit compréhensible par tous les navigateurs. ES6 nous permet d'utiliser les classes et l'héritage en JavaScript.ES6 introduit deux nouveaux mots-clés : let et const. Le premier permet  de déclarer des variables et tend à remplacer var, et const permet de déclarer des constantes. Les Promesses offrent une syntaxe plus efficace que les callbacks, et tendent à les remplacer, surtout pour les développements relatifs à la programmation asynchrone.
+
+
 
 
 
