@@ -1,4 +1,4 @@
-(formation terminée)
+(formation terminée 02-11-2020)
 
 ## Apprentissage 
 
