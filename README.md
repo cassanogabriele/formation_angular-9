@@ -1,3 +1,5 @@
+(formation terminée)
+
 ## Apprentissage 
 
 ## Créer un projet Laravel 
